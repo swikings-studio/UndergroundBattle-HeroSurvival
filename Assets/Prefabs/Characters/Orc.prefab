@@ -531,7 +531,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0.5
-          m_StringArgument: 
+          m_StringArgument: ExperienceOrb
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &3517959508825973293
@@ -568,9 +568,7 @@ MonoBehaviour:
   neededLayersMask:
     serializedVersion: 2
     m_Bits: 8
-  hitTypes:
-  - HitEffect: {fileID: 0}
-    AnimatorBlendTreeHitThreshold: 1
+  hitVariations: []
   onStartHit:
     m_PersistentCalls:
       m_Calls: []
@@ -673,8 +671,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edec620aeb0ef4119b235f05d90edd42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 4091765323190459153, guid: 500f12c0347df4bac9317552fd7d4e9e,
-    type: 3}
+  reference:
+    m_AssetGUID: 500f12c0347df4bac9317552fd7d4e9e
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   offset: {x: 0, y: 0.5, z: 0}
 --- !u!1 &6777795287116797212
 GameObject:

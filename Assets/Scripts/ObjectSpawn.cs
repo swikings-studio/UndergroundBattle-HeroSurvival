@@ -2,21 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.AddressableAssets;
+
 public class ObjectSpawn : MonoBehaviour
 {
-    [SerializeField] private GameObject objectPrefab;
+    [SerializeField] private AssetReferenceGameObject reference;
     [SerializeField] private Vector3 offset = Vector3.zero;
-
+    public void Start()
+    {
+        reference.LoadAssetAsync();
+    }
     public void Spawn()
     {
-        Instantiate(objectPrefab, transform.position + offset, Quaternion.identity);
+        Addressables.InstantiateAsync(reference, transform.position + offset, Quaternion.identity);
     }
-    public void Spawn(Vector3 position)
+    public void Spawn(string key)
     {
-        Instantiate(objectPrefab, position + offset, Quaternion.identity);
-    }
-    public void Spawn(Transform transformPosition)
-    {
-        Instantiate(objectPrefab, transformPosition.position + offset, Quaternion.identity);
+        Addressables.InstantiateAsync(key, transform.position + offset, Quaternion.identity);
     }
 }

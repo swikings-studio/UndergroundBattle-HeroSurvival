@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class FollowTarget : Unit, ILockayable
 {
     [SerializeField, Range(0f, 20f)] private float movementSpeed;
@@ -34,6 +31,7 @@ public class FollowTarget : Unit, ILockayable
     {
         if (IsLocked) return;
 
+        moveManager.Rotate(direction);
         moveManager.Move(direction);
     }
 

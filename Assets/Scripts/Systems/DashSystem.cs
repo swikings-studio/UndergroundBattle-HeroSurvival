@@ -38,7 +38,7 @@ public class DashSystem : Unit, ILockayable
             ForceDash();
         }
     }
-    private void ForceDash()
+    public void ForceDash()
     {
         if (canDash == false) return;
 

@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: GameAssetBundle
+  m_EditorClassIdentifier: 
+  m_GroupName: GameAssetBundle
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 623205383b223468baea8934ec229b50
+  m_SerializeEntries:
+  - m_GUID: 744f8e53392684935abc0c28b163dff7
+    m_Address: Barrel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70e8d8197c99a44bfa854faf9f1e703c
+    m_Address: Assets/Prefabs/Buildings/Column.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 578b79c30f7b34edb9700646ff4081bd
+    m_Address: Assets/Prefabs/Buildings/ColumnWithTorch.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44c92bb7108254bec9582dc0138cbca8
+    m_Address: Assets/Prefabs/Buildings/Floor.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2292490228bed49189a46559a7bd0ef3
+    m_Address: Assets/Prefabs/Buildings/FloorWithStones.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88a858871374e4602a5f78542f4c2115
+    m_Address: Assets/Prefabs/Buildings/Gate.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: accae7b2a181b4dfeb18cbb7d3b4cb2d
+    m_Address: Assets/Prefabs/Buildings/Rocks.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf4c640e32eed4428a81bdf4340bfed4
+    m_Address: Assets/Prefabs/Buildings/Stones.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 284151e076b3047dda56edd28433b2ff
+    m_Address: Assets/Prefabs/Buildings/Wall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b6755fb2142549f1bf9c3056f342f6e
+    m_Address: Assets/Prefabs/Buildings/WallCorner.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e662b3d2a5a642d6a443903a6e903d1
+    m_Address: Orc
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5c57addf353a4a7a91a65ab50d21bc1
+    m_Address: Assets/Prefabs/Characters/Player.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 500f12c0347df4bac9317552fd7d4e9e
+    m_Address: ExperienceOrb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7464f57d889704142acf9471e6476fd0
+    m_Address: DamageCountText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3168a0200db14f00914449960631434
+    m_Address: Flask
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 54621ecfd35ac4b6e8c0144361a062be, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d805e6c2ac71d4c7dbc761a08891fb22, type: 2}
+    - {fileID: 11400000, guid: bcc9b1446de804fbaa43a57b762bf897, type: 2}

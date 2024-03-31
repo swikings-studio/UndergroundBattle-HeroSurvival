@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 
 public class AttackSystem : Unit, ILockayable
@@ -11,10 +12,11 @@ public class AttackSystem : Unit, ILockayable
     [Tooltip("Время в секундах между попытками атаки"), SerializeField, Range(0, 10)] private float reload = 0.5f;
     [SerializeField] private AttackType attackType;
     [SerializeField] private LayerMask neededLayersMask;
-    [SerializeField] private HitType[] hitTypes;
+    [SerializeField] private HitType[] hitVariations;
     [SerializeField] private UnityEvent onStartHit;
 
     private int currentHitVariation = 0;
+    private const string damageCountTextKey = "DamageCountText";
 
     public float Radius => radius;
     public bool IsLocked { get; set; }
@@ -35,7 +37,7 @@ public class AttackSystem : Unit, ILockayable
     private void Start()
     {
         onStartHit.AddListener(() => _animator.SetTrigger("Hit"));
-        onStartHit.AddListener(SwitchHitType);
+        if (hitVariations.Length > 0) onStartHit.AddListener(SwitchHitVariation);
     }
 
     private void OnEnable()
@@ -102,6 +104,7 @@ public class AttackSystem : Unit, ILockayable
             Debug.Log($"{gameObject.name} founded {collider.gameObject.name}");
             if (collider.TryGetComponent(out IDamagable enemy))
             {
+                DamageCountText.Create(collider.GetComponent<MonoBehaviour>(), damage);
                 Attack(enemy, damage);
             }
         }
@@ -113,14 +116,13 @@ public class AttackSystem : Unit, ILockayable
         if (canAttack == false || IsLocked) return;
 
         Debug.Log($"{gameObject.name} attack {target} with {damage} damage");
-
         target.GetHit(damage);
     }
 
-    private void SwitchHitType()
+    private void SwitchHitVariation()
     {
-        if (currentHitVariation >= hitTypes.Length) currentHitVariation = 0;
-        HitType currentHitType = hitTypes[currentHitVariation];
+        if (currentHitVariation >= hitVariations.Length) currentHitVariation = 0;
+        HitType currentHitType = hitVariations[currentHitVariation];
 
         if (currentHitType.HitEffect != null) currentHitType.HitEffect.Play();
         _animator.SetFloat("HitVariation", currentHitType.AnimatorBlendTreeHitThreshold);

@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Item : MonoBehaviour
+public class PickableObject : MonoBehaviour
 {
     [SerializeField] private LayerMask excludeLayersOnThrow;
-    [SerializeField] private int damage = 1;
     [SerializeField] private UnityEvent onDestroy;
 
     private State state = State.Wait;
@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
     private Vector3 endPosition;
     private Collider _collider;
     private Rigidbody _rigidbody;
+    private float throwPower;
 
     private bool isThrowed => state == State.Throwed;
     public bool CanCollected => state == State.Wait;
@@ -28,11 +29,11 @@ public class Item : MonoBehaviour
         _collider.enabled = false;
         state = State.Collected;
     }
-    public void Throwed(Vector3 endPosition, float speed)
+    public void Throwed(Vector3 endPosition, float throwPower)
     {
-        moveManager = new MoveManager(_rigidbody, speed, 0.1f);
+        moveManager = new MoveManager(_rigidbody, throwPower, 0.1f);
 
-        //transform.eulerAngles = Vector3.left * 90;
+        this.throwPower = throwPower;
         _collider.excludeLayers = excludeLayersOnThrow;
         _collider.enabled = true;
         this.endPosition = endPosition;
@@ -43,14 +44,19 @@ public class Item : MonoBehaviour
         if (isThrowed)
         {
             moveManager.MoveKinematic(endPosition - transform.position);
-            _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(360 * Time.fixedDeltaTime * Vector3.right));
+            moveManager.Rotate(_rigidbody.rotation * Quaternion.Euler(360 * Time.fixedDeltaTime * Vector3.right));
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if (isThrowed)
         {
-            if (other.TryGetComponent(out IDamagable damagable)) damagable.GetHit(damage);
+            if (other.TryGetComponent(out IDamagable damagable))
+            {
+                int damage = (int)throwPower;
+                DamageCountText.Create(other.GetComponent<MonoBehaviour>(), damage);
+                damagable.GetHit(damage);
+            }
             StartCoroutine(Destroying());
         }
     }

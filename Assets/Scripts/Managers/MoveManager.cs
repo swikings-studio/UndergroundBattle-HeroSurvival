@@ -38,6 +38,20 @@ public class MoveManager
     {
         if (IsMoving(direction) == false) return;
 
+        _rigidbody.MovePosition(_rigidbody.position + speed * Time.fixedDeltaTime * direction.normalized);
+    }
+    public void Rotate(Vector3 direction)
+    {
+        _rigidbody.MoveRotation(Quaternion.LookRotation(direction.normalized));
+    }
+    public void Rotate(Quaternion quaternion)
+    {
+        _rigidbody.MoveRotation(quaternion);
+    }
+    public void MoveAndRotate(Vector3 direction)
+    {
+        if (IsMoving(direction) == false) return;
+
         _rigidbody.Move(_rigidbody.position + speed * Time.fixedDeltaTime * direction.normalized, Quaternion.LookRotation(direction));
     }
     public void MoveKinematic(Vector3 direction)

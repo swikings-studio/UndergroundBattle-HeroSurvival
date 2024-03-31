@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using System.Linq;
 using System;
 using Random = UnityEngine.Random;
@@ -8,10 +9,10 @@ public class ObjectsPool : MonoBehaviour
     [SerializeField] private int _capacity, _offset;
     [SerializeField, Range(0, 20)] private float _minSpeedSpawn;
     [SerializeField, Range(0, 20)] private float _maxSpeedSpawn;
-    [SerializeField] private GameObject _objectPrefab;
     [SerializeField] private Transform player, upperWall, bottomWall, leftWall, rightWall;
     private float _spawnCooldown;
     private List<GameObject> _pool = new();
+    private const string gameObjectKey = "Orc";
     private readonly Vector3[] directions = new[]
     {
         Vector3.forward,
@@ -21,16 +22,19 @@ public class ObjectsPool : MonoBehaviour
     };
     private void Start()
     {
-        Initialize(_objectPrefab);
+        Initialize();
     }
-    private void Initialize(GameObject prefab)
+    private void Initialize()
     {
         for (int i = 0; i < _capacity; i++)
         {
-            GameObject spawned = Instantiate(prefab, transform);
-            spawned.SetActive(false);
-            if (spawned.TryGetComponent(out FollowTarget followTarget)) followTarget.Initialize(player);
-            _pool.Add(spawned);
+            Addressables.InstantiateAsync(gameObjectKey, transform).Completed += handle =>
+            {
+                GameObject spawned = handle.Result;
+                spawned.SetActive(false);
+                if (spawned.TryGetComponent(out FollowTarget followTarget)) followTarget.Initialize(player);
+                _pool.Add(spawned);
+            };
         }
     }
     private void Update()
@@ -39,9 +43,9 @@ public class ObjectsPool : MonoBehaviour
 
         if (_spawnCooldown <= 0)
         {
+            _spawnCooldown = Random.Range(_minSpeedSpawn, _maxSpeedSpawn);
             if (TryGetObject(out GameObject _object))
             {
-                _spawnCooldown = Random.Range(_minSpeedSpawn, _maxSpeedSpawn);
                 if (_maxSpeedSpawn > 1f) _maxSpeedSpawn -= 0.01f;
                 if (_minSpeedSpawn > 0.5f) _minSpeedSpawn -= 0.01f;
                 Vector3 spawnObjectPosition = GetSpawnPosition();
@@ -66,6 +70,16 @@ public class ObjectsPool : MonoBehaviour
         result = _pool.FirstOrDefault(p => !p.activeSelf);
 
         return result != null;
+    }
+
+    private void OnDestroy()
+    {
+        foreach (GameObject gameObject in _pool)
+        {
+            Addressables.ReleaseInstance(gameObject);
+        }
+
+        _pool.Clear();
     }
     private void OnDrawGizmosSelected()
     {
