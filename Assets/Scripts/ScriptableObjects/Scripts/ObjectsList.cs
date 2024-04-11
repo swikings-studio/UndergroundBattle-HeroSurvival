@@ -12,5 +12,24 @@ public class ObjectsList : ScriptableObject
     {
         public AssetReferenceGameObject Reference;
         public Vector3 Offset;
+        public int DropChance;
+    }
+
+    public Parametrs GetRandomObjectParametrs()
+    {
+        int summaryChance = 0;
+
+        foreach (Parametrs objectParametrs in Objects)
+            summaryChance += objectParametrs.DropChance;
+
+        int randomValue = Random.Range(0, summaryChance);
+        int previousValue = 0;
+        foreach (Parametrs objectParametrs in Objects)
+        {
+            previousValue += objectParametrs.DropChance;
+
+            if (randomValue < previousValue) return objectParametrs;
+        }
+        return Objects[Objects.Length - 1];
     }
 }

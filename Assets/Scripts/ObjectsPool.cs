@@ -9,10 +9,10 @@ public class ObjectsPool : MonoBehaviour
     [SerializeField] private int _capacity, _offset;
     [SerializeField, Range(0, 20)] private float _minSpeedSpawn;
     [SerializeField, Range(0, 20)] private float _maxSpeedSpawn;
+    [SerializeField] private AssetReferenceGameObject objectPrefab;
     [SerializeField] private Transform player, upperWall, bottomWall, leftWall, rightWall;
     private float _spawnCooldown;
     private List<GameObject> _pool = new();
-    private const string gameObjectKey = "Orc";
     private readonly Vector3[] directions = new[]
     {
         Vector3.forward,
@@ -28,7 +28,7 @@ public class ObjectsPool : MonoBehaviour
     {
         for (int i = 0; i < _capacity; i++)
         {
-            Addressables.InstantiateAsync(gameObjectKey, transform).Completed += handle =>
+            Addressables.InstantiateAsync(objectPrefab, transform).Completed += handle =>
             {
                 GameObject spawned = handle.Result;
                 spawned.SetActive(false);
@@ -57,6 +57,7 @@ public class ObjectsPool : MonoBehaviour
     {
         Vector3 randomDirection = directions[Random.Range(0, directions.Length)];
         Vector3 position = player.position + randomDirection * _offset;
+        position.y = 0;
 
         return position;
     }

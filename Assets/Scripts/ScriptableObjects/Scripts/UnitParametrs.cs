@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "UnitName", menuName = "SwiKinGs Studio/Create Unit Parametrs")]
-public class UnitParametrsScriptableObject : ScriptableObject
+public class UnitParametrs : ScriptableObject
 {
-    [SerializeField] private ExperienceOrb experienceOrb;
+    [SerializeField] private CollectableItem experienceOrb;
 }

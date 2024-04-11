@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIUpgradeCard : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private TMP_Text titleText, descriptionText;
+    [SerializeField] private Image iconImage, weaponIconImage;
+    private UpgradeParametrs upgradeParametrs;
 
-    // Update is called once per frame
-    void Update()
+    public void SetParametrs(UpgradeParametrs upgradeParametrs)
     {
-        
+
     }
 }

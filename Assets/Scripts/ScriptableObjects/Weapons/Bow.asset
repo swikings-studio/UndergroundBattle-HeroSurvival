@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb3870a25801490b907543c1d287a84, type: 3}
+  m_Name: Bow
+  m_EditorClassIdentifier: 
+  PrefabReference:
+    m_AssetGUID: 72274eafd631f488084a86cea080d4ab
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  Icon: {fileID: 21300000, guid: 4f1846f5e9ef246f59a339bc877947f1, type: 3}
+  <Description>k__BackingField: Range Attack
+  <Damage>k__BackingField: 25
+  <ReloadDuration>k__BackingField: 2
+  <Radius>k__BackingField: 2
+  <Type>k__BackingField: 2
+  <ProjectilePrefabReference>k__BackingField:
+    m_AssetGUID: 078fcf6e8191c4979bced42cb622766b
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  <Upgrades>k__BackingField:
+  - {fileID: 11400000, guid: 2cf7f892cfae14971b70944de9e97432, type: 2}

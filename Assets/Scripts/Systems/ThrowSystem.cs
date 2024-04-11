@@ -10,6 +10,7 @@ public class ThrowSystem : Unit, ILockayable
     [SerializeField] private LayerMask neededLayerMask;
     [SerializeField] private Transform itemsContainer;
     private const string pickUpAnimatorParametrName = "PickUp", throwAnimatorParametrsName = "Throw";
+    private readonly Vector3 throwOffset = new Vector3(0, 0.25f, 0);//0.2f);
     private PickableObject collectedItem;
 
     public bool IsLocked { get; set; }
@@ -43,7 +44,7 @@ public class ThrowSystem : Unit, ILockayable
 
         Vector3 direction = transform.position + transform.forward * throwRange;
 
-        collectedItem.transform.localPosition = new Vector3(0, 0.25f, 0);//0.2f);
+        collectedItem.transform.localPosition = throwOffset;
         collectedItem.transform.SetParent(null);
         Debug.Log(direction);
         collectedItem.Throwed(direction, throwPower);
@@ -81,6 +82,6 @@ public class ThrowSystem : Unit, ILockayable
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, pickUpRadius);
         Gizmos.color = Color.cyan;
-        Gizmos.DrawRay(transform.position, Vector3.forward * throwRange);
+        Gizmos.DrawRay(transform.localPosition + throwOffset, transform.forward * throwRange);
     }
 }

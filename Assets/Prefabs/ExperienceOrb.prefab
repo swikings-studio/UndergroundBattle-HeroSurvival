@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 4510253400788182331}
   m_Layer: 6
   m_Name: ExperienceOrb
-  m_TagString: Untagged
+  m_TagString: ExperienceOrb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

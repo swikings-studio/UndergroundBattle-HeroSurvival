@@ -69,8 +69,7 @@ public class HealthSystem : Unit, IDamagable
         else
         {
             _animator.SetBool(isInjuredAnimationParametrName, isInjured);
-            if (canPlayGetHitAnimation)
-                _animator.SetTrigger(getHitAnimationParametrName);
+            if (CanPlayAnimation()) _animator.SetTrigger(getHitAnimationParametrName);
             OnGetHit.Invoke();
         }
     }
@@ -119,5 +118,4 @@ public class HealthSystem : Unit, IDamagable
         _animator.SetTrigger("Die");
         transform.DOMoveY(-1, 3f).SetDelay(2f).OnComplete(() => gameObject.SetActive(false));
     }
-    private bool canPlayGetHitAnimation => _animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") || _animator.GetCurrentAnimatorStateInfo(0).IsName("Walk");
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5486015045557658029}
   - component: {fileID: 5392236039992950713}
   - component: {fileID: 2819071585080207247}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -6538903991835684241, guid: 389edb4e005754ecb80e64a04fcf467b, type: 3}
+  - {fileID: 2100000, guid: 66c7c780f00b445c1bed97c5290d8559, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 5053632429132189249}
   - component: {fileID: 5053632429132189279}
   - component: {fileID: 5053632429132189248}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5065,7 +5065,7 @@ GameObject:
   - component: {fileID: 5196863157612507836}
   - component: {fileID: 5390918835573520578}
   - component: {fileID: 5392126502914506010}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shockwave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9965,7 +9965,7 @@ GameObject:
   - component: {fileID: 8098139487901510227}
   - component: {fileID: 8272074846188471241}
   - component: {fileID: 8264226026191636263}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14874,7 +14874,7 @@ GameObject:
   - component: {fileID: 8105648998780546963}
   - component: {fileID: 8264486592054424111}
   - component: {fileID: 8265895930882696045}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

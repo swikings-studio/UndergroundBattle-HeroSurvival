@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 803f363cd07b24b1a8ed81ade82e0920, type: 3}
+  m_Name: DeacreaseReloadDuration
+  m_EditorClassIdentifier: 
+  <Title>k__BackingField: 
+  <Description>k__BackingField: 
+  Icon: {fileID: 0}
+  <OperationEnum>k__BackingField: 1
+  <TypeEnum>k__BackingField: 1
+  <OperationCount>k__BackingField: 0
+  <InstantiatePrefab>k__BackingField:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

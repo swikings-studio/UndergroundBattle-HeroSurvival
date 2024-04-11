@@ -19,3 +19,11 @@ MonoBehaviour:
       m_SubObjectType: 
       m_EditorAssetChanged: 0
     Offset: {x: 0, y: 0.03251104, z: 0}
+    DropChance: 25
+  - Reference:
+      m_AssetGUID: bb5b2e32812b644ebb46dab0aed860e5
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    Offset: {x: 0, y: 0.25, z: 0}
+    DropChance: 50

@@ -14,7 +14,8 @@ public class ObjectSpawn : MonoBehaviour
     }
     public void Spawn()
     {
-        Addressables.InstantiateAsync(reference, transform.position + offset, Quaternion.identity);
+        reference.InstantiateAsync(transform.position + offset, Quaternion.identity);
+        //Addressables.InstantiateAsync(reference, transform.position + offset, Quaternion.identity);
     }
     public void Spawn(string key)
     {

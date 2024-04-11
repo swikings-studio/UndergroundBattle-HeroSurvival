@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class AttackSystem : Unit, ILockayable
 {
     [SerializeField] private bool isAutoAttack;
+    [SerializeField] private List<WeaponParametrs> weapons;
     [SerializeField, Range(0, 100)] private int damage = 1;
     [Tooltip("Радиус попытки атаки"), SerializeField, Range(0, 10)] private float radius = 2;
     [Tooltip("Время в секундах между попытками атаки"), SerializeField, Range(0, 10)] private float reload = 0.5f;
@@ -16,7 +17,6 @@ public class AttackSystem : Unit, ILockayable
     [SerializeField] private UnityEvent onStartHit;
 
     private int currentHitVariation = 0;
-    private const string damageCountTextKey = "DamageCountText";
 
     public float Radius => radius;
     public bool IsLocked { get; set; }
@@ -34,23 +34,26 @@ public class AttackSystem : Unit, ILockayable
     private Coroutine attackingCoroutine;
     private bool canAttack => attackingCoroutine != null;
 
-    private void Start()
+    private void OnEnable()
     {
         onStartHit.AddListener(() => _animator.SetTrigger("Hit"));
         if (hitVariations.Length > 0) onStartHit.AddListener(SwitchHitVariation);
-    }
-
-    private void OnEnable()
-    {
         StartAttacking();
+    }
+    private void OnDisable()
+    {
+        onStartHit.RemoveAllListeners();
+        StopAttacking();
     }
     private IEnumerator Attacking()
     {
+        WaitForSeconds waitForSeconds = new WaitForSeconds(reload);
+
         while (true)
         {
             if (isAutoAttack)
             {
-                yield return new WaitForSeconds(reload);
+                yield return waitForSeconds;
 
                 if (IsLocked) continue;
 
@@ -58,7 +61,7 @@ public class AttackSystem : Unit, ILockayable
             }
             else if (IsTarget())
             {
-                yield return new WaitForSeconds(reload);
+                yield return waitForSeconds;
 
                 if (IsLocked) continue;
 
@@ -151,11 +154,6 @@ public class AttackSystem : Unit, ILockayable
     {
         public ParticleSystem HitEffect;
         public float AnimatorBlendTreeHitThreshold;
-    }
-    public enum AttackType
-    {
-        Melee,
-        Around,
-        Range
-    }
+    
+}
 }
