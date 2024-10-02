@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2496655002257639478}
   - component: {fileID: 462017728418171131}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: WeaponIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Increase sword damage on 100
+  m_text: Increase sword damage on
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0cd5acf88ec0419f988eda6738bdb1f, type: 2}
   m_sharedMaterial: {fileID: 1895173002049944323, guid: e0cd5acf88ec0419f988eda6738bdb1f,
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 34.9
+  m_fontSize: 35.6
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 8081492411694274082}
   - component: {fileID: 3727673700234202682}
   m_Layer: 5
-  m_Name: Icon
+  m_Name: TypeIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,7 +522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1617859102730977765}
   - component: {fileID: 7550401717369412167}
-  - component: {fileID: -5524337247611668531}
+  - component: {fileID: 5794158133595287699}
   m_Layer: 5
   m_Name: UpgradeCard
   m_TagString: Untagged
@@ -565,16 +565,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleText: {fileID: 5512885463320620887}
   descriptionText: {fileID: 5220890360623671751}
-  iconImage: {fileID: 1546541091955210838}
+  WeaponObject: {fileID: 5851793996778057565}
+  upgradeIconImage: {fileID: 1546541091955210838}
   weaponIconImage: {fileID: 462017728418171131}
---- !u!222 &-5524337247611668531
-CanvasRenderer:
+  upgradeTypeIconImage: {fileID: 3727673700234202682}
+  frontsideImage: {fileID: 3476059288289038129}
+  frontsideBackgroundImage: {fileID: 5514931234419717242}
+  backsideImage: {fileID: 393453850890330151}
+  choiceButton: {fileID: 5794158133595287699}
+--- !u!114 &5794158133595287699
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5347150939935415868}
-  m_CullTransparentMesh: 1
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 3476059288289038129}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5851793996778057565
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,7 +666,7 @@ GameObject:
   - component: {fileID: 2898983939777311294}
   - component: {fileID: 5514931234419717242}
   m_Layer: 5
-  m_Name: Background
+  m_Name: FrontsideBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -700,7 +742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2885506988368407324}
   m_Layer: 5
-  m_Name: Fronside
+  m_Name: Frontside
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

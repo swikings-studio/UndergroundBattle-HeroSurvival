@@ -6,7 +6,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using SwiKinGsStudio.UI;
 
-public class HealthSystem : Unit, IDamagable
+public class HealthSystem : BaseSystem, IDamagable
 {
     [SerializeField] private int healths = 1, resistance = 0;
     [SerializeField] private Slider healthBar;
@@ -29,6 +29,13 @@ public class HealthSystem : Unit, IDamagable
         lockayablesManager = new LockayablesManager(this);
         maxHealth = healths;
     }
+
+    public override void Upgrade(float value)
+    {
+        maxHealth += (int)value;
+        UpdateHealthBar();
+    }
+
     private void OnEnable()
     {
         healthBar?.SmoothlyActivate(actionTime);
@@ -72,6 +79,11 @@ public class HealthSystem : Unit, IDamagable
             if (CanPlayAnimation()) _animator.SetTrigger(getHitAnimationParametrName);
             OnGetHit.Invoke();
         }
+    }
+    private bool CanPlayAnimation()
+    {
+        AnimatorStateInfo currentAnimatorState = _animator.GetCurrentAnimatorStateInfo(0);
+        return !currentAnimatorState.IsName("Dash") && !currentAnimatorState.IsName("Attack Blend Tree");
     }
     public void Heal(int healCount)
     {

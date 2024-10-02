@@ -4,13 +4,12 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
 
-public class AttackSystem : Unit, ILockayable
+public class AttackSystem : BaseSystem, ILockayable
 {
     [SerializeField] private bool isAutoAttack;
-    [SerializeField] private List<WeaponParametrs> weapons;
     [SerializeField, Range(0, 100)] private int damage = 1;
-    [Tooltip("Радиус попытки атаки"), SerializeField, Range(0, 10)] private float radius = 2;
-    [Tooltip("Время в секундах между попытками атаки"), SerializeField, Range(0, 10)] private float reload = 0.5f;
+    [Tooltip("Range trying attack"), SerializeField, Range(0, 10)] private float radius = 2;
+    [Tooltip("Time in seconds between attack"), SerializeField, Range(0, 10)] private float reload = 0.5f;
     [SerializeField] private AttackType attackType;
     [SerializeField] private LayerMask neededLayersMask;
     [SerializeField] private HitType[] hitVariations;
@@ -70,7 +69,7 @@ public class AttackSystem : Unit, ILockayable
             yield return null;
         }
     }
-    //В радиусе атаки кто-то есть
+    //In radius attack target founded
     private bool IsTarget()
     {
         switch (attackType)
@@ -86,19 +85,19 @@ public class AttackSystem : Unit, ILockayable
     {
         Debug.Log(gameObject.name + " Melee Attack");
         Collider[] colliders = Physics.OverlapBox(MeleeAttackCubePosition, Vector3.one * radius / 2f, Quaternion.identity, neededLayersMask);
-        AttackDamableObjects(colliders);
+        AttackDamagableObjects(colliders);
     }
     private void AroundAttack()
     {
         Debug.Log(gameObject.name + " Around Attack");
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, neededLayersMask);
-        AttackDamableObjects(colliders);
+        AttackDamagableObjects(colliders);
     }
     private void RangeAttack()
     {
 
     }
-    private void AttackDamableObjects(Collider[] colliders)
+    private void AttackDamagableObjects(Collider[] colliders)
     {
         foreach (Collider collider in colliders)
         {
@@ -156,4 +155,9 @@ public class AttackSystem : Unit, ILockayable
         public float AnimatorBlendTreeHitThreshold;
     
 }
+
+    public override void Upgrade(float value)
+    {
+        
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowSystem : Unit, ILockayable
+public class ThrowSystem : BaseSystem, ILockayable
 {
     [Range(0, 2), SerializeField] private float pickUpRadius;
     [Range(0, 10), SerializeField] private float throwRange;
@@ -83,5 +83,11 @@ public class ThrowSystem : Unit, ILockayable
         Gizmos.DrawWireSphere(transform.position, pickUpRadius);
         Gizmos.color = Color.cyan;
         Gizmos.DrawRay(transform.localPosition + throwOffset, transform.forward * throwRange);
+    }
+
+    public override void Upgrade(float value)
+    {
+        throwRange += value;
+        throwPower += (int)value;
     }
 }

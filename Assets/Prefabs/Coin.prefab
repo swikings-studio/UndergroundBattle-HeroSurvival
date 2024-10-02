@@ -148,4 +148,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 1
   moveSpeed: 6
+  idleAnimationType: 1
   _light: {fileID: 0}

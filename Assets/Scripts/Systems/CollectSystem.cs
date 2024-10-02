@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using SwiKinGsStudio.UI;
 using UnityEngine.Events;
 
-public class CollectSystem : MonoBehaviour
+public class CollectSystem : BaseSystem
 {
     [Range(0f, 10f), SerializeField] private float radius;
     [SerializeField] private LayerMask neededLayerMask;
@@ -59,6 +59,7 @@ public class CollectSystem : MonoBehaviour
         level++;
         neededExperience *= 2;
         experience = 0;
+        GameTimeManager.SetTimeScaleSmoothly(0.5f, 0);
         onLevelUp.Invoke();
     }
     private void UpdateExperienceBar()
@@ -73,5 +74,10 @@ public class CollectSystem : MonoBehaviour
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    public override void Upgrade(float value)
+    {
+        radius += value;
     }
 }

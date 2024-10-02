@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DashSystem : Unit, ILockayable
+public class DashSystem : BaseSystem, ILockayable
 {
     [SerializeField] private float distance, duration, reloadDuration;
     [SerializeField] private LayerMask unitLayerMask;
@@ -23,6 +23,11 @@ public class DashSystem : Unit, ILockayable
         _collider = GetComponent<Collider>();
     }
 
+    public override void Upgrade(float value)
+    {
+        distance += value;
+    }
+
     private void Start()
     {
         lockayablesManager = new LockayablesManager(this);
@@ -40,7 +45,7 @@ public class DashSystem : Unit, ILockayable
     }
     public void ForceDash()
     {
-        if (canDash == false) return;
+        if (CanDash == false) return;
 
         StartCoroutine(Dashing());
     }
@@ -82,7 +87,7 @@ public class DashSystem : Unit, ILockayable
         _isReloading = false;
         yield break;
     }
-    private bool canDash => _isDashing == false && _isReloading == false && IsLocked == false;
+    private bool CanDash => _isDashing == false && _isReloading == false && IsLocked == false;
 
     private void OnDrawGizmosSelected()
     {

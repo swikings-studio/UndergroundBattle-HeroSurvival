@@ -1,68 +1,67 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
+using Random = UnityEngine.Random;
 
 public class UILevelUp : MonoBehaviour
 {
     [SerializeField] private TMP_Text newLevelNumberText;
     [SerializeField] private Transform cardUpgradesContainer;
-    [SerializeField] private AssetReferenceGameObject cardPrefab;
-    [SerializeField] private UpgradesList upgradesList;
     [SerializeField] private GameObject player;
-    [SerializeField] private LevelCard[] levelCards;
-    private void CheckPlayerSystems()
-    {
-        PlayerSystem[] playerSystems = (PlayerSystem[])Enum.GetValues(typeof(PlayerSystem));
-        List<Upgrade> actualUpgrades = new List<Upgrade>();
+    [SerializeField] private CardSpritesList cardSpritesList;
+    [SerializeField] private UpgradesList upgrades;
+    private int upgradesCount = 3;
+    private UpgradesManager _upgradesManager;
 
-        foreach (PlayerSystem playerSystem in playerSystems)
-        {
-            if (TryGetPlayerSystem(playerSystem, out MonoBehaviour systemComponent))
-            {
-                actualUpgrades.Add(upgradesList.GetUpgrade(playerSystem));
-            }
-        }
+    private void Start()
+    {
+        _upgradesManager = new UpgradesManager(player);
+        ClearUpgrades();
     }
 
-    private bool TryGetPlayerSystem<T>(PlayerSystem system, out T systemComponent) where T : Component
+    public void Open()
     {
-        systemComponent = default;
-        switch (system)
-        {
-            case PlayerSystem.Move:
-                if (player.TryGetComponent(out MoveSystem moveSystem))
-                    systemComponent = moveSystem as T;
-                break;
-            case PlayerSystem.Dash:
-                if (player.TryGetComponent(out DashSystem dashSystem))
-                    systemComponent = dashSystem as T;
-                    break;
-            case PlayerSystem.Attack:
-                if (player.TryGetComponent(out AttackSystem attackSystem))
-                    systemComponent = attackSystem as T;
-                    break;
-            case PlayerSystem.Collect:
-                if (player.TryGetComponent(out CollectSystem collectSystem))
-                    systemComponent = collectSystem as T;
-                    break;
-            case PlayerSystem.Throw:
-                if (player.TryGetComponent(out ThrowSystem ThrowSystem))
-                    systemComponent = ThrowSystem as T;
-                    break;
-            case PlayerSystem.Health:
-                if (player.TryGetComponent(out HealthSystem healthSystem))
-                    systemComponent = healthSystem as T;
-                    break;
-                    default: return false;
-        }
-        return systemComponent != null;
+        gameObject.SetActive(true);
+        SetUpgradeCards();
     }
-    [System.Serializable]
-    private struct LevelCard
+
+    private void SetUpgradeCards()
     {
-        public Sprite ReverseSideSprite, ForegroundSprite, BackgroundSprite;
+        for (int i = 0; i < upgradesCount; i++)
+        {
+            var card = cardUpgradesContainer.GetChild(i).GetComponent<UIUpgradeCard>();
+            var currentUpgrade = upgrades.List[i] as UpgradeSystem;
+            int upgradeLevel = _upgradesManager.GetUpgrateLevel(currentUpgrade);
+        
+            card.SetParametrs(currentUpgrade, cardSpritesList.GetLevelCardSprites(upgradeLevel),() => _upgradesManager.ApplyUpgrade(currentUpgrade));
+        }
+    }
+    
+    public void Close()
+    {
+        ClearUpgrades();
+        gameObject.SetActive(false);
+    }
+
+    public void SetUpgradesCount(int count)
+    {
+        int maxCount = cardUpgradesContainer.childCount;
+
+        if (count > maxCount)
+        {
+            count = maxCount;
+            Debug.LogWarning("Maximum upgrades count value exceeded. Set on " + maxCount);
+        }
+
+        upgradesCount = count;
+    }
+    private void ClearUpgrades()
+    {
+        for (int i = 0; i < cardUpgradesContainer.childCount; i++)
+        {
+            GameObject upgradeCard = cardUpgradesContainer.GetChild(i).gameObject;
+            upgradeCard.SetActive(false);
+        }
     }
 }

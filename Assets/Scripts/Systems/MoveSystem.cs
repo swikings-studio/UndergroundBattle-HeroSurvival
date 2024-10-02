@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-public class MoveSystem : Unit, ILockayable
+public class MoveSystem : BaseSystem, ILockayable
 {
     [SerializeField, Range(0f, 20f)] private float _movementSpeed;
     [SerializeField] private FixedJoystick joystick;
@@ -34,7 +34,15 @@ public class MoveSystem : Unit, ILockayable
             moveDirection = new Vector3(joystick.Direction.x, 0, joystick.Direction.y);
         }
         _animator.SetBool(moveManager.AnimatorNameParametr, moveManager.IsMoving(moveDirection));
-    }   
+    }
+
+    public override void Upgrade(float value)
+    {
+        Debug.Log("Upgrade Move Speed");
+        _movementSpeed += value;
+        moveManager = new MoveManager(_rigidbody, _movementSpeed);
+    }
+
     private void FixedUpdate()
     {
         if (IsLocked) return;

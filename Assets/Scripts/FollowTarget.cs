@@ -1,5 +1,5 @@
 using UnityEngine;
-public class FollowTarget : Unit, ILockayable
+public class FollowTarget : BaseSystem, ILockayable
 {
     [SerializeField, Range(0f, 20f)] private float movementSpeed;
     [SerializeField] private Transform target;
@@ -39,5 +39,10 @@ public class FollowTarget : Unit, ILockayable
     {
         IsLocked = true;
         _animator.SetBool(moveManager.AnimatorNameParametr, false);
+    }
+
+    public override void Upgrade(float value)
+    {
+        
     }
 }

@@ -42,6 +42,8 @@ public class MoveManager
     }
     public void Rotate(Vector3 direction)
     {
+        if (direction == Vector3.zero) return;
+
         _rigidbody.MoveRotation(Quaternion.LookRotation(direction.normalized));
     }
     public void Rotate(Quaternion quaternion)

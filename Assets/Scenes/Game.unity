@@ -21,9 +21,9 @@ RenderSettings:
   m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
-  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
-  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 0, b: 0, a: 1}
+  m_AmbientEquatorColor: {r: 0, g: 0, b: 0, a: 1}
+  m_AmbientGroundColor: {r: 0.10670447, g: 1, b: 0, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.45874867, g: 0.48568475, b: 0.5754717, a: 1}
@@ -39,7 +39,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 410087040}
-  m_IndirectSpecularColor: {r: 0.18018535, g: 0.22559482, b: 0.30677685, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,8 +97,9 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: bd91e1b2af80a4924b2ecc7cfbcadd82,
+  m_LightingDataAsset: {fileID: 112000000, guid: 653ebae1cec6445e9b8867ae6d3ab241,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 9e10611150d1e497cab86f977fed9e47,
     type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -2449,38 +2449,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newLevelNumberText: {fileID: 107035857}
   cardUpgradesContainer: {fileID: 923356143}
-  cardPrefab:
-    m_AssetGUID: 63d43046922f7446c83409bd94978952
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  upgradesList: {fileID: 11400000, guid: 087d6b3e7246f40c2889b83cfdea5c58, type: 2}
   player: {fileID: 445349449}
-  levelCards:
-  - ReverseSideSprite: {fileID: 0}
-    ForegroundSprite: {fileID: 0}
-    BackgroundSprite: {fileID: 0}
-  - ReverseSideSprite: {fileID: 21300000, guid: 792d27b5fecf946a5ad82e91d5d8e311,
-      type: 3}
-    ForegroundSprite: {fileID: 21300000, guid: a1d9da6291b6e4ea3ba30f333fd40f61, type: 3}
-    BackgroundSprite: {fileID: 21300000, guid: 855f0d3947e814e3da2a765e75a8a6e2, type: 3}
-  - ReverseSideSprite: {fileID: 21300000, guid: 52fed60e3811c4c789456b38dc75a2f3,
-      type: 3}
-    ForegroundSprite: {fileID: 21300000, guid: a7f4774b18ddf4fc1a9beaddc1695beb, type: 3}
-    BackgroundSprite: {fileID: 21300000, guid: 21608e8e5894a4d8eac684df82be8ea1, type: 3}
-  - ReverseSideSprite: {fileID: 21300000, guid: c65f8aeb01c1f4588bce932b628d8e72,
-      type: 3}
-    ForegroundSprite: {fileID: 21300000, guid: fbf3690a99d95449895ef6bc92f8b7d4, type: 3}
-    BackgroundSprite: {fileID: 21300000, guid: 82b8e098d24bd4773ae9ac677867e846, type: 3}
-  - ReverseSideSprite: {fileID: 0}
-    ForegroundSprite: {fileID: 0}
-    BackgroundSprite: {fileID: 0}
-  - ReverseSideSprite: {fileID: 0}
-    ForegroundSprite: {fileID: 0}
-    BackgroundSprite: {fileID: 0}
-  - ReverseSideSprite: {fileID: 0}
-    ForegroundSprite: {fileID: 0}
-    BackgroundSprite: {fileID: 0}
+  cardSpritesList: {fileID: 11400000, guid: 65d5de430ff6143cf8ac415eebe480b0, type: 2}
+  upgrades: {fileID: 11400000, guid: a14354799259847a996f471d182eec4e, type: 2}
 --- !u!1001 &126920010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7436,7 +7407,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
+  m_Color: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
   m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
@@ -7474,14 +7445,14 @@ Light:
   m_RenderMode: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 137
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
-  m_UseColorTemperature: 1
+  m_ColorTemperature: 8000
+  m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: -1.6731144e+24, y: 6e-44, z: 6e-45, w: 1.9321e-41}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -12574,7 +12545,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 918.6286, y: -589.81946}
+  m_AnchoredPosition: {x: 910.8255, y: -594.654}
   m_SizeDelta: {x: 2018, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &725865821
@@ -14230,7 +14201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 918.6286, y: -143.31946}
+  m_AnchoredPosition: {x: 910.8255, y: -148.15399}
   m_SizeDelta: {x: 623, y: 143}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &834606074
@@ -14735,7 +14706,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 866667474}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.49269882, y: 0.000000029945966, z: -0.000000016955122, w: 0.8701999}
+  m_LocalRotation: {x: 0.49269882, y: 0.000000029945962, z: -0.000000016955115, w: 0.8701999}
   m_LocalPosition: {x: 0, y: 5, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15603,7 +15574,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 918.6286, y: -843.31946}
+  m_AnchoredPosition: {x: 910.8255, y: -848.154}
   m_SizeDelta: {x: 1618, y: 427}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &923356144
@@ -23709,6 +23680,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeCard (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5347150939935415868, guid: 63d43046922f7446c83409bd94978952,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5512885463320620887, guid: 63d43046922f7446c83409bd94978952,
         type: 3}
       propertyPath: m_fontSize
@@ -25709,12 +25685,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!20 &1478081959
 Camera:
   m_ObjectHideFlags: 0
@@ -28053,12 +28029,12 @@ MonoBehaviour:
   m_RequiresColorTexture: 0
   m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!81 &1597255127
 AudioListener:
   m_ObjectHideFlags: 0
@@ -28106,7 +28082,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 479
+    m_Bits: 991
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -28126,7 +28102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597255125}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.49269882, y: 0.000000029945966, z: -0.000000016955122, w: 0.8701999}
+  m_LocalRotation: {x: 0.49269882, y: 0.000000029945962, z: -0.000000016955115, w: 0.8701999}
   m_LocalPosition: {x: 0, y: 5, z: -3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -28789,6 +28765,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UpgradeCard (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5347150939935415868, guid: 63d43046922f7446c83409bd94978952,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5512885463320620887, guid: 63d43046922f7446c83409bd94978952,
         type: 3}
       propertyPath: m_fontSize
@@ -28932,6 +28913,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UpgradeCard (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347150939935415868, guid: 63d43046922f7446c83409bd94978952,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5512885463320620887, guid: 63d43046922f7446c83409bd94978952,
         type: 3}
@@ -31459,7 +31445,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 918.6286, y: -389.81946}
+  m_AnchoredPosition: {x: 910.8255, y: -394.654}
   m_SizeDelta: {x: 650, y: 320}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1776788471
@@ -34445,7 +34431,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1943927648}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
   m_Name: 
@@ -37917,11 +37903,91 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1412646365}
+    - target: {fileID: 1034003939926615814, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 5.191826
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034003939926615814, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 17.302662
+      objectReference: {fileID: 0}
+    - target: {fileID: 1034003939926615814, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 33.974625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231816750408817018, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -19.454
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231816750408817018, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 14.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2027430363710259336, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 9.794265
+      objectReference: {fileID: 0}
     - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
         type: 3}
       propertyPath: experienceBar
       value: 
       objectReference: {fileID: 544337705}
+    - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: onLevelUp.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: onLevelUp.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: onLevelUp.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 123719456}
+    - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: onLevelUp.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: onLevelUp.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: onLevelUp.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UILevelUp, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2171007451140793586, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: onLevelUp.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504093189202881136, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -185.799
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504093189202881136, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 211.198
+      objectReference: {fileID: 0}
+    - target: {fileID: 2504093189202881136, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -158.301
+      objectReference: {fileID: 0}
     - target: {fileID: 4308293388638754445, guid: b5c57addf353a4a7a91a65ab50d21bc1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -37971,6 +38037,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725286616829798622, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 19.455383
+      objectReference: {fileID: 0}
+    - target: {fileID: 6110838622662523686, guid: b5c57addf353a4a7a91a65ab50d21bc1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -19.455395
       objectReference: {fileID: 0}
     - target: {fileID: 7419359331355846338, guid: b5c57addf353a4a7a91a65ab50d21bc1,
         type: 3}
@@ -38149,6 +38225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UpgradeCard
+      objectReference: {fileID: 0}
+    - target: {fileID: 5347150939935415868, guid: 63d43046922f7446c83409bd94978952,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5512885463320620887, guid: 63d43046922f7446c83409bd94978952,
         type: 3}

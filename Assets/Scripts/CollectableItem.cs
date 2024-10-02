@@ -1,20 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Events;
 using UnityEngine.AddressableAssets;
+using SwiKinGsStudio;
+
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class CollectableItem : MonoBehaviour
 {
     [Range(1, 10), SerializeField] private int points = 1;
     [SerializeField] private float moveSpeed = 5;
+    [SerializeField] private AnimationType idleAnimationType;
     [SerializeField] private Light _light;
+
     private MoveManager moveManager;
-    private bool isTriggered;
+    private bool isTriggered = false;
     public bool IsTriggered => isTriggered;
-    private Sequence soaring;
     private const float actionTime = 0.3f, soaringRange = 0.1f;
+    private Tween idleAnimation;
+
     private void Awake()
     {
         moveManager = new MoveManager(GetComponent<Rigidbody>(), moveSpeed);
@@ -39,20 +43,25 @@ public class CollectableItem : MonoBehaviour
 
         collider.enabled = true;
         yield return new WaitForEndOfFrame();
-        if (isTriggered) yield break;
-        soaring = DOTween.Sequence();
-        soaring.Append(transform.DOLocalMoveY(transform.localPosition.y + soaringRange, actionTime * 5));
-        soaring.Append(transform.DOLocalMoveY(transform.localPosition.y - soaringRange, actionTime * 6));
-        soaring.Append(transform.DOLocalMoveY(transform.localPosition.y, actionTime * 4).SetEase(Ease.Linear));
-        soaring.SetLoops(-1, LoopType.Restart);
 
-        yield break;
+        if (isTriggered) yield break;
+
+        idleAnimation = GetIdleAnimation();
+    }
+    private Tween GetIdleAnimation()
+    {
+        return idleAnimationType switch
+        {
+            AnimationType.Soaring => AnimationsManager.Soaring(transform, soaringRange, actionTime * 4),
+            AnimationType.Rotating => AnimationsManager.Rotating(transform, new Vector3(0, 180, 0), actionTime * 4),
+            _ => null,
+        };
     }
     public void MoveTo(Transform target, UnityAction<int> callbackOnComplete)
     {
         if (isTriggered) return;
 
-        soaring.Kill();
+        idleAnimation?.Kill();
         GetComponent<Collider>().enabled = false;
         StartCoroutine(Moving(target, callbackOnComplete));
     }
@@ -70,11 +79,11 @@ public class CollectableItem : MonoBehaviour
         }
 
         callbackOnComplete.Invoke(points);
-        transform.DOScale(0, actionTime).WaitForCompletion();
-        if (_light != null) _light.DOIntensity(0, actionTime).WaitForCompletion();
-        yield return new WaitForSeconds(actionTime);
+        if (_light != null) _light.DOIntensity(0, actionTime);
+        yield return transform.DOScale(0, actionTime).WaitForCompletion();
 
         Addressables.ReleaseInstance(gameObject);
         yield break;
     }
+
 }
