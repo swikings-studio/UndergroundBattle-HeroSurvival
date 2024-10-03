@@ -4,7 +4,11 @@ using UnityEngine;
 public class CardSpritesList : ScriptableObject
 {
     [SerializeField] private LevelCardSprites[] levelCards;
-    public LevelCardSprites GetLevelCardSprites(int level)
+    [SerializeField] private Sprite systemUpgradeIconSprite, abilityIconSprite, weaponIconSprite;
+    public Sprite SystemUpgradeIconSprite => systemUpgradeIconSprite;
+    public Sprite AbilityIconSprite => abilityIconSprite;
+    public Sprite WeaponIconSprite => weaponIconSprite;
+    public LevelCardSprites GetSpritesByLevel(int level)
     {
         if (level < 0 || level >= levelCards.Length)
             throw new System.Exception("Needed level is not corrected");

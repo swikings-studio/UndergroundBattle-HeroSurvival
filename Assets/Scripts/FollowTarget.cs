@@ -22,7 +22,7 @@ public class FollowTarget : BaseSystem, ILockayable
     }
     private void Update()
     {
-        if (target == null || IsLocked) return;
+        if (target is null || IsLocked) return;
 
         direction = target.position - transform.position;
         _animator.SetBool(moveManager.AnimatorNameParametr, moveManager.IsMoving(direction));

@@ -9,4 +9,8 @@ public static class GameTimeManager
     {
         DOTween.To(x => Time.timeScale = x, Time.timeScale, endValue, duration);
     }
+    public static void SetTimeScaleSmoothly(float duration, float endValue, float delay)
+    {
+        DOTween.To(x => Time.timeScale = x, Time.timeScale, endValue, duration).SetDelay(delay);
+    }
 }

@@ -17,14 +17,37 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 623205383b223468baea8934ec229b50
   m_SerializeEntries:
-  - m_GUID: 70e8d8197c99a44bfa854faf9f1e703c
-    m_Address: Assets/Prefabs/Buildings/Column.prefab
+  - m_GUID: 078fcf6e8191c4979bced42cb622766b
+    m_Address: Arrow
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2292490228bed49189a46559a7bd0ef3
+    m_Address: Assets/Prefabs/Buildings/FloorWithStones.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 578b79c30f7b34edb9700646ff4081bd
-    m_Address: Assets/Prefabs/Buildings/ColumnWithTorch.prefab
+  - m_GUID: 284151e076b3047dda56edd28433b2ff
+    m_Address: Assets/Prefabs/Buildings/Wall.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31b29cea830e0e24da72018652e5ed31
+    m_Address: Assets/Materials/21 GREY-LIGHT-LPUP.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 371b626fd423b4d2790ad7a0b707dadf
+    m_Address: colormap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ae03e4d7cee640a882228342434e0e6
+    m_Address: Assets/Materials/LevelUp.mat
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -35,32 +58,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2292490228bed49189a46559a7bd0ef3
-    m_Address: Assets/Prefabs/Buildings/FloorWithStones.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 88a858871374e4602a5f78542f4c2115
-    m_Address: Assets/Prefabs/Buildings/Gate.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: accae7b2a181b4dfeb18cbb7d3b4cb2d
-    m_Address: Assets/Prefabs/Buildings/Rocks.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: bf4c640e32eed4428a81bdf4340bfed4
-    m_Address: Assets/Prefabs/Buildings/Stones.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 284151e076b3047dda56edd28433b2ff
-    m_Address: Assets/Prefabs/Buildings/Wall.prefab
+  - m_GUID: 46d669f3e068849f79e6cae7d739e773
+    m_Address: Assets/Materials/ExperienceOrb.mat
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -77,32 +76,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b5c57addf353a4a7a91a65ab50d21bc1
-    m_Address: Assets/Prefabs/Characters/Player.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 500f12c0347df4bac9317552fd7d4e9e
     m_Address: ExperienceOrb
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7464f57d889704142acf9471e6476fd0
-    m_Address: DamageCountText
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b3168a0200db14f00914449960631434
-    m_Address: Flask
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 371b626fd423b4d2790ad7a0b707dadf
-    m_Address: colormap
+  - m_GUID: 578b79c30f7b34edb9700646ff4081bd
+    m_Address: Assets/Prefabs/Buildings/ColumnWithTorch.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -113,26 +94,49 @@ MonoBehaviour:
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 46d669f3e068849f79e6cae7d739e773
-    m_Address: Assets/Materials/ExperienceOrb.mat
+  - m_GUID: 70e8d8197c99a44bfa854faf9f1e703c
+    m_Address: Assets/Prefabs/Buildings/Column.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3ae03e4d7cee640a882228342434e0e6
-    m_Address: Assets/Materials/LevelUp.mat
+  - m_GUID: 72274eafd631f488084a86cea080d4ab
+    m_Address: Bow
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 31b29cea830e0e24da72018652e5ed31
-    m_Address: Assets/Materials/21 GREY-LIGHT-LPUP.mat
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - default
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 744f8e53392684935abc0c28b163dff7
     m_Address: Barrel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7464f57d889704142acf9471e6476fd0
+    m_Address: DamageCountText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88a858871374e4602a5f78542f4c2115
+    m_Address: Assets/Prefabs/Buildings/Gate.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: accae7b2a181b4dfeb18cbb7d3b4cb2d
+    m_Address: Assets/Prefabs/Buildings/Rocks.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3168a0200db14f00914449960631434
+    m_Address: Flask
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5c57addf353a4a7a91a65ab50d21bc1
+    m_Address: Assets/Prefabs/Characters/Player.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - default
@@ -142,13 +146,14 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 72274eafd631f488084a86cea080d4ab
-    m_Address: Bow
+  - m_GUID: bf4c640e32eed4428a81bdf4340bfed4
+    m_Address: Assets/Prefabs/Buildings/Stones.prefab
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - default
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 078fcf6e8191c4979bced42cb622766b
-    m_Address: Arrow
+  - m_GUID: da984393efb924ca182e3f09f9cc5c3b
+    m_Address: Assets/Prefabs/Sawblade.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

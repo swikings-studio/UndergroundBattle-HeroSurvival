@@ -79,7 +79,7 @@ public class CollectableItem : MonoBehaviour
         }
 
         callbackOnComplete.Invoke(points);
-        if (_light != null) _light.DOIntensity(0, actionTime);
+        if (_light) _light.DOIntensity(0, actionTime);
         yield return transform.DOScale(0, actionTime).WaitForCompletion();
 
         Addressables.ReleaseInstance(gameObject);

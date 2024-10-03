@@ -14,7 +14,7 @@ public class UILevelUp : MonoBehaviour
     private int upgradesCount = 3;
     private UpgradesManager _upgradesManager;
 
-    private void Start()
+    private void Awake()
     {
         _upgradesManager = new UpgradesManager(player);
         ClearUpgrades();
@@ -31,10 +31,15 @@ public class UILevelUp : MonoBehaviour
         for (int i = 0; i < upgradesCount; i++)
         {
             var card = cardUpgradesContainer.GetChild(i).GetComponent<UIUpgradeCard>();
-            var currentUpgrade = upgrades.List[i] as UpgradeSystem;
-            int upgradeLevel = _upgradesManager.GetUpgrateLevel(currentUpgrade);
+            var randomUpgrade = upgrades.List[Random.Range(0, upgrades.List.Length)] as UpgradeSystem;
+            int upgradeLevel = _upgradesManager.GetUpgrateLevel(randomUpgrade);
         
-            card.SetParametrs(currentUpgrade, cardSpritesList.GetLevelCardSprites(upgradeLevel),() => _upgradesManager.ApplyUpgrade(currentUpgrade));
+            card.SetParametrs(randomUpgrade, cardSpritesList.GetSpritesByLevel(upgradeLevel), () =>
+            {
+                _upgradesManager.ApplyUpgrade(randomUpgrade);
+                Close();
+            });
+            card.gameObject.SetActive(true);
         }
     }
     
@@ -42,6 +47,7 @@ public class UILevelUp : MonoBehaviour
     {
         ClearUpgrades();
         gameObject.SetActive(false);
+        GameTimeManager.SetTimeScaleSmoothly(0.5f, 1);
     }
 
     public void SetUpgradesCount(int count)

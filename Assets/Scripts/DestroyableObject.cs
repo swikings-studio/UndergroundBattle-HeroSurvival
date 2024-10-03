@@ -22,7 +22,6 @@ public class DestroyableObject : MonoBehaviour, IDamagable
         if (isSpawnObject)
         {
             innerObjectParametrs = spawnObjectsList.GetRandomObjectParametrs();
-            //innerObjectParametrs = spawnObjectsList.Objects[Random.Range(0, spawnObjectsList.Objects.Length)];
         }
     }
     public void GetHit(int damage)
@@ -30,6 +29,7 @@ public class DestroyableObject : MonoBehaviour, IDamagable
         if (healths - damage < 0) damage = healths;
 
         healths -= damage;
+        DamageCountText.Create(this, damage);
 
         if (healths <= 0)
         {

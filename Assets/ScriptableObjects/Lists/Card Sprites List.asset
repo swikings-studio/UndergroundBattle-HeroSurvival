@@ -48,3 +48,7 @@ MonoBehaviour:
       type: 3}
     ForegroundSprite: {fileID: 21300000, guid: bf0e0248bf87d43bfb21827b94258ba9, type: 3}
     BackgroundSprite: {fileID: 21300000, guid: b42c4589196984b458cb385a3a7e13cd, type: 3}
+  systemUpgradeIconSprite: {fileID: 21300000, guid: f3d64c2ad8b4c4668952996a1f90aba5,
+    type: 3}
+  abilityIconSprite: {fileID: 21300000, guid: 0c8491a96ff0b4f39871e1f53784f56e, type: 3}
+  weaponIconSprite: {fileID: 21300000, guid: cb3b31ebae0d94986a769b3d9c7730f0, type: 3}

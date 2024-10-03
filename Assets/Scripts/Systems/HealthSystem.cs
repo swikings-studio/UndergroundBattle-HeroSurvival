@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -65,7 +66,8 @@ public class HealthSystem : BaseSystem, IDamagable
         if (damage <= 0) damage = 1;
 
         healths -= damage;
-
+        
+        DamageCountText.Create(this, damage);
         UpdateHealthBar();
         healthBar?.FillBlink(actionTime / 2f);
 
@@ -128,6 +130,14 @@ public class HealthSystem : BaseSystem, IDamagable
 
         lockayablesManager.LockAll();
         _animator.SetTrigger("Die");
-        transform.DOMoveY(-1, 3f).SetDelay(2f).OnComplete(() => gameObject.SetActive(false));
+        transform.DOMoveY(-1, 3f).SetDelay(_animator.GetCurrentAnimatorStateInfo(0).length).OnComplete(() => gameObject.SetActive(false));
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (transform.CompareTag("Enemy") && other.TryGetComponent(out BaseAbility ability))
+        {
+            GetHit(Mathf.RoundToInt(ability.Value));    
+        }
     }
 }

@@ -106,7 +106,6 @@ public class AttackSystem : BaseSystem, ILockayable
             Debug.Log($"{gameObject.name} founded {collider.gameObject.name}");
             if (collider.TryGetComponent(out IDamagable enemy))
             {
-                DamageCountText.Create(collider.GetComponent<MonoBehaviour>(), damage);
                 Attack(enemy, damage);
             }
         }

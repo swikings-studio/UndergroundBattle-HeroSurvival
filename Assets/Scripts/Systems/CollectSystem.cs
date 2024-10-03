@@ -59,7 +59,7 @@ public class CollectSystem : BaseSystem
         level++;
         neededExperience *= 2;
         experience = 0;
-        GameTimeManager.SetTimeScaleSmoothly(0.5f, 0);
+        GameTimeManager.SetTimeScaleSmoothly(0.5f, 0, 0.5f);
         onLevelUp.Invoke();
     }
     private void UpdateExperienceBar()
