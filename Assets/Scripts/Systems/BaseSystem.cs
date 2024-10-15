@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody), typeof(Animator))]
+
 public abstract class BaseSystem : MonoBehaviour
 {
     protected Rigidbody _rigidbody;
@@ -9,16 +7,16 @@ public abstract class BaseSystem : MonoBehaviour
 
     public virtual void Awake()
     {
-        if (_rigidbody == null)
+        if (_rigidbody == null && TryGetComponent(out Rigidbody rigidbody))
         {
             Debug.Log("Get Rigidbody");
-            _rigidbody = GetComponent<Rigidbody>();
+            _rigidbody = rigidbody;
         }
 
-        if (_animator == null)
+        if (_animator == null && TryGetComponent(out Animator animator))
         {
             Debug.Log("Get Animator");
-            _animator = GetComponent<Animator>();
+            _animator = animator;
         }
     }
 

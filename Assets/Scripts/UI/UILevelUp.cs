@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class UILevelUp : MonoBehaviour
 {
@@ -28,13 +26,16 @@ public class UILevelUp : MonoBehaviour
 
     private void SetUpgradeCards()
     {
-        for (int i = 0; i < upgradesCount; i++)
+        List<int> randomNumbers = new List<int>();
+        randomNumbers.GetRandomNumbersWithoutRepeat(upgradesCount, upgrades.List.Length);
+        
+        for (int i = 0; i < randomNumbers.Count; i++)
         {
             var card = cardUpgradesContainer.GetChild(i).GetComponent<UIUpgradeCard>();
-            var randomUpgrade = upgrades.List[Random.Range(0, upgrades.List.Length)] as UpgradeSystem;
+            var randomUpgrade = upgrades.List[randomNumbers[i]];
             int upgradeLevel = _upgradesManager.GetUpgrateLevel(randomUpgrade);
         
-            card.SetParametrs(randomUpgrade, cardSpritesList.GetSpritesByLevel(upgradeLevel), () =>
+            card.SetParametrs(randomUpgrade, cardSpritesList.GetSpritesByLevel(upgradeLevel), cardSpritesList.GetUpgradeIconSpriteByType(randomUpgrade), () =>
             {
                 _upgradesManager.ApplyUpgrade(randomUpgrade);
                 Close();

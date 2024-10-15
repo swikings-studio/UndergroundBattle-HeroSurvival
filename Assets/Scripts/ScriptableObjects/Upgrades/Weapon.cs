@@ -5,5 +5,5 @@ using UnityEngine.AddressableAssets;
 public class Weapon : Upgrade
 {
     public AssetReferenceGameObject Reference;
-    public float[] cooldownSecondsByLevel;
+    public float[] cooldownSecondsByLevel = new float[7];
 }

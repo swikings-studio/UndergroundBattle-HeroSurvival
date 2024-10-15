@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Coin
   - ExperienceOrb
+  - Ability
   layers:
   - Default
   - TransparentFX

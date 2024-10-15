@@ -15,7 +15,20 @@ public class UpgradesManager
         _upgradesLevel = new Dictionary<Upgrade, int>();
     }
 
-    public void ApplyUpgrade(UpgradeSystem upgrade)
+    public void ApplyUpgrade<T>(T upgrade) where T : Upgrade
+    {
+        if (upgrade is UpgradeSystem system) UpgradeSystem(system);
+        else if (upgrade is Weapon weapon)
+        {
+            
+        }
+        else if (upgrade is Ability ability)
+        {
+            
+        }
+    }
+
+    private void UpgradeSystem(UpgradeSystem upgrade)
     {
         if (TryGetPlayerSystem(upgrade.System, out BaseSystem component))
         {

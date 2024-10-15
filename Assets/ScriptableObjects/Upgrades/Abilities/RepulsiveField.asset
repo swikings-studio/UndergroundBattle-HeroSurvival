@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aa7b50b46bd6448d798c11471e35d366, type: 3}
-  m_Name: Sawblade
+  m_Name: RepulsiveField
   m_EditorClassIdentifier: 
-  Title: Sawblade
-  Description: Throw sawblade around player
-  Icon: {fileID: 21300000, guid: bfe727811a64244218601711880b79eb, type: 3}
+  Title: Repulsive Field
+  Description: Repulsive Field
+  Icon: {fileID: 21300000, guid: 56ff5950f8c044352ae5d1671e559091, type: 3}
   LevelValues:
-  - 1
+  - 0.5
   - 1
   - 1
   - 1
@@ -24,18 +24,18 @@ MonoBehaviour:
   - 1
   - 1
   Reference:
-    m_AssetGUID: da984393efb924ca182e3f09f9cc5c3b
+    m_AssetGUID: 50bca833658d247fe9aff1ac80e8aa91
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   ApplySecondsByLevel:
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
+  - 8
+  - 8
+  - 8
+  - 8
+  - 8
+  - 8
+  - 8
   CooldownSecondsByLevel:
   - 1
   - 1

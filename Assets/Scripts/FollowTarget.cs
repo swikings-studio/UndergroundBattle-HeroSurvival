@@ -13,7 +13,7 @@ public class FollowTarget : BaseSystem, ILockayable
         if (target == null) throw new System.Exception("Target not founded");
 
         attackRange = TryGetComponent(out AttackSystem attackSystem) ? attackSystem.Radius : 1;
-        if (target.TryGetComponent(out HealthSystem targetHealthSystem)) targetHealthSystem.OnDie.AddListener(Lock);
+        if (target.TryGetComponent(out HealthSystem targetHealthSystem)) targetHealthSystem.OnHealthsOver.AddListener(Lock);
         moveManager = new MoveManager(_rigidbody, movementSpeed, attackRange);
     }
     public void Initialize(Transform target)

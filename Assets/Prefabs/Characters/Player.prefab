@@ -15144,11 +15144,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4308293388638754445}
+  - component: {fileID: 3690791299236192973}
   - component: {fileID: 7583159547912157053}
   - component: {fileID: 1322528049358287608}
   - component: {fileID: 263112855798769263}
   - component: {fileID: 2171007451140793586}
-  - component: {fileID: 3690791299236192973}
   - component: {fileID: 7878094046015726118}
   - component: {fileID: 8400745209812431154}
   - component: {fileID: 1869400729338112443}
@@ -15179,6 +15179,34 @@ Transform:
   - {fileID: 3362970767965225968}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3690791299236192973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7419359331355846338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a165ae494a8d4f12bb66e4eb078dbde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAutoAttack: 1
+  damage: 10
+  radius: 0.6
+  reload: 2
+  attackType: 0
+  neededLayersMask:
+    serializedVersion: 2
+    m_Bits: 384
+  hitVariations:
+  - HitEffect: {fileID: 2924833901911624131}
+    AnimatorBlendTreeHitThreshold: 0
+  - HitEffect: {fileID: 0}
+    AnimatorBlendTreeHitThreshold: 1
+  onStartHit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7583159547912157053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15232,7 +15260,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healths: 25
   resistance: 0
-  healthBar: {fileID: 0}
   OnGetHit:
     m_PersistentCalls:
       m_Calls:
@@ -15248,9 +15275,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnDie:
+  OnHealthsOver:
     m_PersistentCalls:
       m_Calls: []
+  healthBar: {fileID: 0}
 --- !u!114 &2171007451140793586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15284,36 +15312,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onCoinCollect:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3690791299236192973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7419359331355846338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a165ae494a8d4f12bb66e4eb078dbde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAutoAttack: 1
-  weapons:
-  - {fileID: 11400000, guid: 980c7017d3d2647c1aa09e0fe0202716, type: 2}
-  damage: 10
-  radius: 0.6
-  reload: 2
-  attackType: 0
-  neededLayersMask:
-    serializedVersion: 2
-    m_Bits: 384
-  hitVariations:
-  - HitEffect: {fileID: 2924833901911624131}
-    AnimatorBlendTreeHitThreshold: 0
-  - HitEffect: {fileID: 0}
-    AnimatorBlendTreeHitThreshold: 1
-  onStartHit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &7878094046015726118

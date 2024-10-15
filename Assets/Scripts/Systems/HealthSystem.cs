@@ -1,43 +1,33 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using DG.Tweening;
 using UnityEngine.UI;
 using SwiKinGsStudio.UI;
 
-public class HealthSystem : BaseSystem, IDamagable
+public class HealthSystem : BaseHealthSystem
 {
-    [SerializeField] private int healths = 1, resistance = 0;
     [SerializeField] private Slider healthBar;
-    public UnityEvent OnGetHit, OnDie;
-    private Color normalFillColorHealthBar;
+    private Color _normalFillColorHealthBar;
     private LockayablesManager lockayablesManager;
 
-    private int maxHealth;
-    private bool _isDied, _isInvulnerability, _isFirstTimeEnable = true;
-    public bool IsDied => _isDied;
+    private bool _isFirstTimeEnable = true;
     private const float actionTime = 0.15f;
-    private bool isInjured { get => (float)healths / maxHealth <= 0.4f; }
 
     private const string getHitAnimationParametrName = "GetHit", isInjuredAnimationParametrName = "isInjured";
 
     public override void Awake()
     {
         base.Awake();
-        if (healthBar != null) normalFillColorHealthBar = healthBar.GetFillColor();
+        if (healthBar != null) _normalFillColorHealthBar = healthBar.GetFillColor();
         lockayablesManager = new LockayablesManager(this);
-        maxHealth = healths;
     }
 
     public override void Upgrade(float value)
     {
-        maxHealth += (int)value;
+        base.Upgrade(value);
         UpdateHealthBar();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         healthBar?.SmoothlyActivate(actionTime);
         UpdateHealthBar();
@@ -47,33 +37,21 @@ public class HealthSystem : BaseSystem, IDamagable
             _isFirstTimeEnable = false;
             return;
         }
-
-        healths = maxHealth;
-        _isDied = false;
+        base.OnEnable();
 
         lockayablesManager.UnlockAll();
-        if (TryGetComponent(out Collider collider)) collider.enabled = true;
+        _collider.enabled = true;
     }
-    private void Start()
+    public override void GetHit(int damage)
     {
-        OnDie.AddListener(Die);
-    }
-    public void GetHit(int damage)
-    {
-        if (_isDied || _isInvulnerability) return;
-
-        damage -= resistance;
-        if (damage <= 0) damage = 1;
-
-        healths -= damage;
+        base.GetHit(damage);
         
-        DamageCountText.Create(this, damage);
         UpdateHealthBar();
         healthBar?.FillBlink(actionTime / 2f);
 
         if (healths <= 0)
         {
-            OnDie.Invoke();
+            OnHealthsOver.Invoke();
         }
         else
         {
@@ -87,19 +65,16 @@ public class HealthSystem : BaseSystem, IDamagable
         AnimatorStateInfo currentAnimatorState = _animator.GetCurrentAnimatorStateInfo(0);
         return !currentAnimatorState.IsName("Dash") && !currentAnimatorState.IsName("Attack Blend Tree");
     }
-    public void Heal(int healCount)
+    public override void Heal(int healCount)
     {
-        if (_isDied) return;
-
-        if (healths + healCount > maxHealth) healCount = maxHealth;
-
-        healths += healCount;
+        base.Heal(healCount);
+        
         _animator.SetBool(isInjuredAnimationParametrName, isInjured);
         UpdateHealthBar();
     }
     private void UpdateHealthBar()
     {
-        if (healthBar == null) return;
+        if (healthBar is null) return;
 
         float neededValue = (float)healths / maxHealth;
 
@@ -108,22 +83,20 @@ public class HealthSystem : BaseSystem, IDamagable
             healthBar.StartFillBlinking(actionTime * 2f);
             healthBar.SetSmoothlyColor(Color.red, actionTime);
         }
-        else if (healthBar.GetFillColor() != normalFillColorHealthBar)
+        else if (healthBar.GetFillColor() != _normalFillColorHealthBar)
         {
             healthBar.StopFillBlinking();
-            healthBar.SetSmoothlyColor(normalFillColorHealthBar, actionTime);
+            healthBar.SetSmoothlyColor(_normalFillColorHealthBar, actionTime);
         }
 
         healthBar.SetSmoothlyValue(neededValue, actionTime);
     }
-    public void ActivateInvulnerability() => _isInvulnerability = true;
-    public void DeactivateInvulnerability() => _isInvulnerability = false;
-    private void Die()
-    {
-        if (TryGetComponent(out Collider collider)) collider.enabled = false;
-        if (TryGetComponent(out AttackSystem attackSystem)) attackSystem.StopAttacking();
 
-        _isDied = true;
+    protected override void Die()
+    {
+        if (TryGetComponent(out AttackSystem attackSystem)) attackSystem.StopAttacking();
+        
+        base.Die();
 
         healthBar?.StopFillBlinking();
         healthBar?.SmoothlyDisable(actionTime);
@@ -133,11 +106,4 @@ public class HealthSystem : BaseSystem, IDamagable
         transform.DOMoveY(-1, 3f).SetDelay(_animator.GetCurrentAnimatorStateInfo(0).length).OnComplete(() => gameObject.SetActive(false));
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (transform.CompareTag("Enemy") && other.TryGetComponent(out BaseAbility ability))
-        {
-            GetHit(Mathf.RoundToInt(ability.Value));    
-        }
-    }
 }

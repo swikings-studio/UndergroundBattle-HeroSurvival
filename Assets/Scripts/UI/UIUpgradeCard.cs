@@ -12,11 +12,15 @@ public class UIUpgradeCard : MonoBehaviour
     [SerializeField] private GameObject weaponObject;
     [SerializeField] private Image upgradeIconImage, weaponIconImage, upgradeTypeIconImage, frontsideImage, frontsideBackgroundImage, backsideImage;
     [SerializeField] private Button choiceButton;
-    public void SetParametrs<T>(T upgrade, LevelCardSprites levelCardSprites, UnityAction onSelect) where T : Upgrade
+    public void SetParametrs<T>(T upgrade, LevelCardSprites levelCardSprites, Sprite typeIconSprite, UnityAction onSelect, Sprite weaponIconSprite = null) where T : Upgrade
     {
         upgradeIconImage.sprite = upgrade.Icon;
         titleText.text = upgrade.Title;
         descriptionText.text = upgrade.Description;
+        
+        weaponObject.SetActive(weaponIconSprite is not null);
+        weaponIconImage.sprite = weaponIconSprite;
+        upgradeTypeIconImage.sprite = typeIconSprite;
 
         frontsideImage.sprite = levelCardSprites.ForegroundSprite;
         frontsideBackgroundImage.sprite = levelCardSprites.BackgroundSprite;
