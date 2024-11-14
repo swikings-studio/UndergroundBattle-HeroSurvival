@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowSystem : BaseSystem, ILockayable
+public class ThrowSystem : BaseSystem, ILockayable, IUpgradable
 {
     [Range(0, 2), SerializeField] private float pickUpRadius;
     [Range(0, 10), SerializeField] private float throwRange;
@@ -85,7 +85,9 @@ public class ThrowSystem : BaseSystem, ILockayable
         Gizmos.DrawRay(transform.localPosition + throwOffset, transform.forward * throwRange);
     }
 
-    public override void Upgrade(float value)
+    public PlayerSystem PlayerSystem { get; } = PlayerSystem.Throw;
+
+    public void Upgrade(float value)
     {
         throwRange += value;
         throwPower += (int)value;

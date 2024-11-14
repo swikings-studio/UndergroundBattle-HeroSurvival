@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Content Update
+  m_EditorClassIdentifier: 
+  m_GroupName: Content Update
+  m_GUID: a4f4bc36647e74383abcf33c6f4d4ca9
+  m_SerializeEntries:
+  - m_GUID: 078fcf6e8191c4979bced42cb622766b
+    m_Address: Arrow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0a0df191793e042b5bbbf129287b6bc6
+    m_Address: HealField
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2292490228bed49189a46559a7bd0ef3
+    m_Address: FloorWithStones
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 284151e076b3047dda56edd28433b2ff
+    m_Address: Wall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 31b29cea830e0e24da72018652e5ed31
+    m_Address: GreyLightMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 371b626fd423b4d2790ad7a0b707dadf
+    m_Address: colormap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 39863c4295a6f4ea4ac35d4868f26923
+    m_Address: Slash Effect
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ae03e4d7cee640a882228342434e0e6
+    m_Address: LevelUpMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44c92bb7108254bec9582dc0138cbca8
+    m_Address: Floor
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 46d669f3e068849f79e6cae7d739e773
+    m_Address: ExperienceOrbMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b6755fb2142549f1bf9c3056f342f6e
+    m_Address: WallCorner
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e662b3d2a5a642d6a443903a6e903d1
+    m_Address: Orc
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 500f12c0347df4bac9317552fd7d4e9e
+    m_Address: ExperienceOrb
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50bca833658d247fe9aff1ac80e8aa91
+    m_Address: RepulsiveField
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 578b79c30f7b34edb9700646ff4081bd
+    m_Address: ColumnWithTorch
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 66c7c780f00b445c1bed97c5290d8559
+    m_Address: ColorMapMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70e8d8197c99a44bfa854faf9f1e703c
+    m_Address: Column
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72274eafd631f488084a86cea080d4ab
+    m_Address: Bow
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 744f8e53392684935abc0c28b163dff7
+    m_Address: Barrel
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7464f57d889704142acf9471e6476fd0
+    m_Address: DamageCountText
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88a858871374e4602a5f78542f4c2115
+    m_Address: Gate
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: accae7b2a181b4dfeb18cbb7d3b4cb2d
+    m_Address: Rocks
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b3168a0200db14f00914449960631434
+    m_Address: Flask
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5c57addf353a4a7a91a65ab50d21bc1
+    m_Address: Player
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb5b2e32812b644ebb46dab0aed860e5
+    m_Address: Coin
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf4c640e32eed4428a81bdf4340bfed4
+    m_Address: Stones
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: da984393efb924ca182e3f09f9cc5c3b
+    m_Address: Sawblade
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - default
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 54621ecfd35ac4b6e8c0144361a062be, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0c5431f566e364cfcb496ef1cc87d09b, type: 2}
+    - {fileID: 11400000, guid: a09d8967772dc46b8b747de9e729fe7f, type: 2}

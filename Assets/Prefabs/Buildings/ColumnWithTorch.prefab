@@ -101,6 +101,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5320820468789936274, guid: 7a937ee5bc40ba142a195e3a41fa7258,
+        type: 3}
+      propertyPath: m_AdditionalLightsShadowResolutionTier
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6558209637878306230, guid: 7a937ee5bc40ba142a195e3a41fa7258,
         type: 3}
       propertyPath: m_Layer

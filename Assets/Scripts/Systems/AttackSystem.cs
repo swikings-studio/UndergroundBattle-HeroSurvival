@@ -1,102 +1,196 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.Events;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class AttackSystem : BaseSystem, ILockayable
 {
     [SerializeField] private bool isAutoAttack;
-    [SerializeField, Range(0, 100)] private int damage = 1;
-    [Tooltip("Range trying attack"), SerializeField, Range(0, 10)] private float radius = 2;
-    [Tooltip("Time in seconds between attack"), SerializeField, Range(0, 10)] private float reload = 0.5f;
-    [SerializeField] private AttackType attackType;
+    [SerializeField] private List<AttackUpgrade> upgrades;
     [SerializeField] private LayerMask neededLayersMask;
-    [SerializeField] private HitType[] hitVariations;
-    [SerializeField] private UnityEvent onStartHit;
+    [SerializeField] private Transform attackUpgradesContainer, activeWeaponsContainer;
+    
+    public float RadiusCurrentAttackUpgrade => CurrentAttackUpgrade ? CurrentAttackUpgrade.Radius : 1;
+    
+    private AttackUpgrade CurrentAttackUpgrade => upgrades[_currentUpgradeIndex];
+    private readonly Dictionary<string, GameObject> _instantiatedUpgradesByTitle = new ();
+    private int _currentUpgradeIndex;
 
-    private int currentHitVariation = 0;
-
-    public float Radius => radius;
     public bool IsLocked { get; set; }
 
-    public void StartAttacking()
+    private void StartAttacking()
     {
-        attackingCoroutine = StartCoroutine(Attacking());
-    }
-    public void StopAttacking()
-    {
-        if (attackingCoroutine != null)
-            StopCoroutine(attackingCoroutine);
+        _attackingCoroutine = StartCoroutine(Attacking());
     }
 
-    private Coroutine attackingCoroutine;
-    private bool canAttack => attackingCoroutine != null;
+    public void StopAttacking()
+    {
+        if (_attackingCoroutine == null) return;
+
+        StopCoroutine(_attackingCoroutine);
+        _attackingCoroutine = null;
+    }
+
+    private Coroutine _attackingCoroutine;
+    private bool CanAttack => _attackingCoroutine != null;
 
     private void OnEnable()
     {
-        onStartHit.AddListener(() => _animator.SetTrigger("Hit"));
-        if (hitVariations.Length > 0) onStartHit.AddListener(SwitchHitVariation);
         StartAttacking();
     }
+
     private void OnDisable()
     {
-        onStartHit.RemoveAllListeners();
         StopAttacking();
     }
+
     private IEnumerator Attacking()
     {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(reload);
-
-        while (true)
+        if (upgrades.Count == 0)
         {
+            StopAttacking();
+            yield break;
+        }
+
+        var waitForUnlock = new WaitUntil(() => IsLocked == false);
+
+        while (upgrades.Count > 0)
+        {
+            var waitForReload = new WaitForSeconds(CurrentAttackUpgrade.Reload);
+
             if (isAutoAttack)
             {
-                yield return waitForSeconds;
+                yield return waitForReload;
 
-                if (IsLocked) continue;
+                yield return waitForUnlock;
 
-                onStartHit.Invoke();
+                yield return StartCoroutine(UseCurrentAttackUpgrade());
             }
             else if (IsTarget())
             {
-                yield return waitForSeconds;
+                yield return waitForReload;
 
-                if (IsLocked) continue;
+                yield return waitForUnlock;
 
-                onStartHit.Invoke();
+                yield return StartCoroutine(UseCurrentAttackUpgrade());
             }
+
+            NextAttackUpgrade();
             yield return null;
         }
     }
-    //In radius attack target founded
-    private bool IsTarget()
+
+    private void NextAttackUpgrade()
     {
-        switch (attackType)
+        if (_currentUpgradeIndex + 1 >= upgrades.Count) _currentUpgradeIndex = 0;
+        else _currentUpgradeIndex++;
+    }
+
+    public void AddAttackUpgrade(AttackUpgrade newUpgrade)
+    {
+        if (upgrades.Contains(newUpgrade)) return;
+        
+        upgrades.Add(newUpgrade);
+    }
+
+    private IEnumerator UseCurrentAttackUpgrade()
+    {
+        switch (CurrentAttackUpgrade)
         {
-            default:
-                return Physics.CheckBox(MeleeAttackCubePosition, Vector3.one * radius, Quaternion.identity, neededLayersMask);
-            case AttackType.Around:
-            case AttackType.Range:
-                return Physics.CheckSphere(transform.position, radius, neededLayersMask);
+            case Weapon weapon:
+                if (weapon.animationVariation == HitVariation.None)
+                {
+                    AttackAction();
+                }
+                else
+                {
+                    _animator.SetFloat(AnimatorHitVariationFloatName, weapon.AnimationHitVariation);
+                    _animator.SetTrigger(AnimatorHitTriggerName);
+                }
+                
+                if (weapon.reference.RuntimeKeyIsValid())//TODO: Load from AddressableManager
+                {
+                    if (_instantiatedUpgradesByTitle.TryGetValue(weapon.Title, out var weaponObject) == false)
+                    {
+                        var container = weapon.spawnAsWeapon ? activeWeaponsContainer : attackUpgradesContainer;
+                        var operationHandle = Addressables.InstantiateAsync(weapon.reference, container);
+                        if (!operationHandle.IsDone) yield return operationHandle;
+                        
+                        if (operationHandle.Status == AsyncOperationStatus.Succeeded)
+                        {
+                            weaponObject = operationHandle.Result;
+                        }
+                        else
+                        {
+                            Debug.LogError("Error Instantiate weapon");
+                            operationHandle.Release();
+                            yield break;
+                        }
+                        
+                        StartCoroutine(weapon.EnableParticlesWithDelay(weaponObject));
+                        _instantiatedUpgradesByTitle.Add(weapon.Title, weaponObject);
+                    }
+                    else
+                    {
+                        weaponObject.SetActive(true);
+                        
+                        StartCoroutine(weapon.EnableParticlesWithDelay(weaponObject));
+                        
+                        yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+                        
+                        weaponObject.SetActive(false);
+                    }
+                    
+                }
+                break;
+            case Ability ability:
+                break;
         }
     }
+
+    /// <summary>
+    /// Find target in radius
+    /// </summary>
+    /// <returns>In radius attack target founded</returns>
+    private bool IsTarget()
+    {
+        if (CurrentAttackUpgrade is Weapon weapon)
+            switch (weapon.attackType)
+            {
+                default:
+                    return Physics.CheckBox(MeleeAttackCubePosition, Vector3.one * CurrentAttackUpgrade.Radius,
+                        Quaternion.identity, neededLayersMask);
+                case AttackType.Around:
+                case AttackType.Range:
+                    return Physics.CheckSphere(transform.position, CurrentAttackUpgrade.Radius, neededLayersMask);
+            }
+
+        return CurrentAttackUpgrade is Ability; //TODO: Check after ability radius set
+    }
+
     private void MeleeAttack()
     {
         Debug.Log(gameObject.name + " Melee Attack");
-        Collider[] colliders = Physics.OverlapBox(MeleeAttackCubePosition, Vector3.one * radius / 2f, Quaternion.identity, neededLayersMask);
+        Collider[] colliders = Physics.OverlapBox(MeleeAttackCubePosition,
+            Vector3.one * CurrentAttackUpgrade.Radius / 2f, Quaternion.identity, neededLayersMask);
         AttackDamagableObjects(colliders);
     }
+
     private void AroundAttack()
     {
         Debug.Log(gameObject.name + " Around Attack");
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius, neededLayersMask);
+        Collider[] colliders =
+            Physics.OverlapSphere(transform.position, CurrentAttackUpgrade.Radius, neededLayersMask);
         AttackDamagableObjects(colliders);
     }
+
     private void RangeAttack()
     {
-
+        Debug.Log(gameObject.name + " Range Attack");
     }
+
     private void AttackDamagableObjects(Collider[] colliders)
     {
         foreach (Collider collider in colliders)
@@ -106,57 +200,53 @@ public class AttackSystem : BaseSystem, ILockayable
             Debug.Log($"{gameObject.name} founded {collider.gameObject.name}");
             if (collider.TryGetComponent(out IDamagable enemy))
             {
-                Attack(enemy, damage);
+                Attack(enemy, CurrentAttackUpgrade.ValueInt);
             }
         }
     }
-    public void AttackWithCurrentAttackType() => GetAttackAction().Invoke();
 
     private void Attack<T>(T target, int damage) where T : IDamagable
     {
-        if (canAttack == false || IsLocked) return;
+        if (CanAttack == false || IsLocked) return;
 
         Debug.Log($"{gameObject.name} attack {target} with {damage} damage");
         target.GetHit(damage);
     }
 
-    private void SwitchHitVariation()
-    {
-        if (currentHitVariation >= hitVariations.Length) currentHitVariation = 0;
-        HitType currentHitType = hitVariations[currentHitVariation];
-
-        if (currentHitType.HitEffect != null) currentHitType.HitEffect.Play();
-        _animator.SetFloat("HitVariation", currentHitType.AnimatorBlendTreeHitThreshold);
-        currentHitVariation++;
-    }
-
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(MeleeAttackCubePosition, Vector3.one * radius);
-    }
-    private Vector3 MeleeAttackCubePosition => transform.position + transform.forward * (radius / 2f);
-
-    private UnityAction GetAttackAction() => GetAttackAction(attackType);
-    private UnityAction GetAttackAction(AttackType attackType)
-    {
-        return attackType switch
+        if (CurrentAttackUpgrade && CurrentAttackUpgrade is Weapon currentAttackWeapon)
         {
-            AttackType.Around => AroundAttack,
-            AttackType.Range => RangeAttack,
-            _ => MeleeAttack,
-        };
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(MeleeAttackCubePosition, Vector3.one * currentAttackWeapon.Radius);
+        }
     }
-    [System.Serializable]
-    private struct HitType
-    {
-        public ParticleSystem HitEffect;
-        public float AnimatorBlendTreeHitThreshold;
-    
-}
 
-    public override void Upgrade(float value)
+    private Vector3 MeleeAttackCubePosition =>
+        transform.position + transform.forward * (CurrentAttackUpgrade.Radius / 2f);
+
+    /// <summary>
+    /// Applying from hit animation clip if current attack upgrade have it
+    /// </summary>
+    private void AttackAction()
     {
-        
+        if (CurrentAttackUpgrade is Weapon weapon)
+            switch (weapon.attackType)
+            {
+                case AttackType.Melee:
+                    MeleeAttack();
+                    break;
+                case AttackType.Around:
+                    AroundAttack();
+                    break;
+                case AttackType.Range:
+                    RangeAttack();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        else if (CurrentAttackUpgrade is Ability ability)
+        {
+        }
     }
 }

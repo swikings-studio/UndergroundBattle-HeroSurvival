@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Helios.GUI {
     public class SingletonMono<T> : MonoBehaviour where T : Component {
@@ -7,7 +9,7 @@ namespace Helios.GUI {
         public static T Instance {
             get {
                 if (_instance == null) {
-                    var objs = FindObjectsOfType(typeof(T)) as T[];
+                    var objs = FindObjectsByType<T>(FindObjectsSortMode.None) as T[];
                     if (objs.Length > 0)
                         _instance = objs[0];
                     if (objs.Length > 1) {
@@ -62,7 +64,7 @@ namespace Helios.GUI {
         public static T Instance {
             get {
                 if (instance == null) {
-                    T[] managers = Object.FindObjectsOfType(typeof(T)) as T[];
+                    T[] managers = Object.FindObjectsByType<T>(FindObjectsSortMode.None) as T[];
                     if (managers.Length != 0) {
                         if (managers.Length == 1) {
                             instance = managers[0];

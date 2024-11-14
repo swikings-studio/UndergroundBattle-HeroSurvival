@@ -3,18 +3,18 @@ public class FollowTarget : BaseSystem, ILockayable
 {
     [SerializeField, Range(0f, 20f)] private float movementSpeed;
     [SerializeField] private Transform target;
-    private MoveManager moveManager;
-    private Vector3 direction;
+    private MoveManager _moveManager;
+    private Vector3 _direction;
 
-    private float attackRange;
+    private float _attackRange;
     public bool IsLocked { get; set; }
     private void Start()
     {
         if (target == null) throw new System.Exception("Target not founded");
 
-        attackRange = TryGetComponent(out AttackSystem attackSystem) ? attackSystem.Radius : 1;
+        _attackRange = TryGetComponent(out AttackSystem attackSystem) ? attackSystem.RadiusCurrentAttackUpgrade : 0.5f;
         if (target.TryGetComponent(out HealthSystem targetHealthSystem)) targetHealthSystem.OnHealthsOver.AddListener(Lock);
-        moveManager = new MoveManager(_rigidbody, movementSpeed, attackRange);
+        _moveManager = new MoveManager(_rigidbody, movementSpeed, _attackRange);
     }
     public void Initialize(Transform target)
     {
@@ -24,25 +24,20 @@ public class FollowTarget : BaseSystem, ILockayable
     {
         if (target is null || IsLocked) return;
 
-        direction = target.position - transform.position;
-        _animator.SetBool(moveManager.AnimatorNameParametr, moveManager.IsMoving(direction));
+        _direction = target.position - transform.position;
+        _animator.SetBool(_moveManager.AnimatorNameParametr, _moveManager.IsMoving(_direction));
     }
     private void FixedUpdate()
     {
         if (IsLocked) return;
 
-        moveManager.Rotate(direction);
-        moveManager.Move(direction);
+        _moveManager.Rotate(_direction);
+        _moveManager.Move(_direction);
     }
 
     public void Lock()
     {
         IsLocked = true;
-        _animator.SetBool(moveManager.AnimatorNameParametr, false);
-    }
-
-    public override void Upgrade(float value)
-    {
-        
+        _animator.SetBool(_moveManager.AnimatorNameParametr, false);
     }
 }

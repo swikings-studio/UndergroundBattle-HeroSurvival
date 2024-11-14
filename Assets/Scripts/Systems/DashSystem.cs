@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DashSystem : BaseSystem, ILockayable
+public class DashSystem : BaseSystem, ILockayable, IUpgradable
 {
     [SerializeField] private float distance, duration, reloadDuration;
     [SerializeField] private LayerMask unitLayerMask;
@@ -23,7 +23,9 @@ public class DashSystem : BaseSystem, ILockayable
         _collider = GetComponent<Collider>();
     }
 
-    public override void Upgrade(float value)
+    public PlayerSystem PlayerSystem { get; } = PlayerSystem.Dash;
+
+    public void Upgrade(float value)
     {
         distance += value;
     }
@@ -54,7 +56,7 @@ public class DashSystem : BaseSystem, ILockayable
     {
         float speed = distance / duration;
         float savedAnimatorSpeed = _animator.speed;
-        float savedDrag = _rigidbody.drag;
+        float savedDrag = _rigidbody.linearDamping;
 
         onStartDash.Invoke();
         _isDashing = true;
@@ -64,15 +66,15 @@ public class DashSystem : BaseSystem, ILockayable
 
         _collider.excludeLayers = unitLayerMask;
 
-        _rigidbody.drag = 0;
-        _rigidbody.velocity = speed * transform.forward;
+        _rigidbody.linearDamping = 0;
+        _rigidbody.linearVelocity = speed * transform.forward;
         yield return new WaitForSeconds(duration);
-        _rigidbody.velocity = Vector3.zero;
+        _rigidbody.linearVelocity = Vector3.zero;
         _rigidbody.angularVelocity = Vector3.zero;
 
         StartCoroutine(Reloading());
 
-        _rigidbody.drag = savedDrag;
+        _rigidbody.linearDamping = savedDrag;
         _animator.speed = savedAnimatorSpeed;
         _collider.excludeLayers = 0;
         _isDashing = false;

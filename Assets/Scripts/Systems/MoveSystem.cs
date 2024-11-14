@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using YG;
 
-public class MoveSystem : BaseSystem, ILockayable
+public class MoveSystem : BaseSystem, ILockayable, IUpgradable
 {
     [SerializeField, Range(0f, 20f)] private float _movementSpeed;
-    [SerializeField] private FixedJoystick joystick;
+    [Space, SerializeField] private FixedJoystick joystick;
     [SerializeField] private GameObject mobileUI;
     private MoveManager moveManager;
 
@@ -36,7 +36,9 @@ public class MoveSystem : BaseSystem, ILockayable
         _animator.SetBool(moveManager.AnimatorNameParametr, moveManager.IsMoving(moveDirection));
     }
 
-    public override void Upgrade(float value)
+    public PlayerSystem PlayerSystem { get; } = PlayerSystem.Move;
+
+    public void Upgrade(float value)
     {
         Debug.Log("Upgrade Move Speed");
         _movementSpeed += value;

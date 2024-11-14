@@ -17,6 +17,7 @@ public class DestroyableObject : BaseHealthSystem
         if (isSpawnObject)
         {
             innerObjectParametrs = spawnObjectsList.GetRandomObjectParametrs();
+            //innerObjectParametrs.Reference.LoadAssetAsync();
         }
     }
     public override void GetHit(int damage)

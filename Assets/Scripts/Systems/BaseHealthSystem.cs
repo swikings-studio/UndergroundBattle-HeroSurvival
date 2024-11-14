@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 [RequireComponent(typeof(Collider))]
-public class BaseHealthSystem : BaseSystem, IDamagable
+public class BaseHealthSystem : BaseSystem, IDamagable, IUpgradable
 {
     [SerializeField] protected int healths = 1, resistance = 0;
     public UnityEvent OnGetHit, OnHealthsOver;
@@ -20,7 +20,9 @@ public class BaseHealthSystem : BaseSystem, IDamagable
         _collider = GetComponent<Collider>();
     }
 
-    public override void Upgrade(float value)
+    public PlayerSystem PlayerSystem { get; } = PlayerSystem.Health;
+
+    public virtual void Upgrade(float value)
     {
         maxHealth += (int)value;
     }

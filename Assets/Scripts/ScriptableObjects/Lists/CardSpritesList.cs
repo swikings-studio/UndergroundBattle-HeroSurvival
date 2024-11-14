@@ -22,7 +22,7 @@ public class CardSpritesList : ScriptableObject
         if (level < 0 || level >= levelCards.Length)
             throw new System.Exception("Needed level is not corrected");
 
-        return levelCards[level - 1];
+        return levelCards[level];
     }
 }
 

@@ -23,24 +23,35 @@ MonoBehaviour:
   - 1
   - 1
   - 1
-  Reference:
+  reference:
     m_AssetGUID: 50bca833658d247fe9aff1ac80e8aa91
     m_SubObjectName: 
+    m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  ApplySecondsByLevel:
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  - 8
-  CooldownSecondsByLevel:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  cooldownSecondsByLevel:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  radiusByLevel:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  applySecondsByLevel:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  neededUpgradeAndLevelForOpen:
+    Items: []

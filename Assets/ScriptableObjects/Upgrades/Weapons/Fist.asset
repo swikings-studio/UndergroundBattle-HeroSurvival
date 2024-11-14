@@ -13,26 +13,39 @@ MonoBehaviour:
   m_Name: Fist
   m_EditorClassIdentifier: 
   Title: Fist
-  Description: 
-  Icon: {fileID: 0}
+  Description: Default Weapon
+  Icon: {fileID: 21300000, guid: 2eb008985ec2343cfa7f9d304a68bb56, type: 3}
   LevelValues:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  Reference:
-    m_AssetGUID: 
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  reference:
+    m_AssetGUID: 39863c4295a6f4ea4ac35d4868f26923
     m_SubObjectName: 
+    m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
   cooldownSecondsByLevel:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  radiusByLevel:
+  - 0.5
+  - 0.6
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  attackType: 0
+  animationVariation: 0
+  spawnAsWeapon: 0
+  DelayBeforeEffect: 0.1

@@ -5,16 +5,17 @@ using UnityEngine.UI;
 using SwiKinGsStudio.UI;
 using UnityEngine.Events;
 
-public class CollectSystem : BaseSystem
+public class CollectSystem : BaseSystem, IUpgradable
 {
     [Range(0f, 10f), SerializeField] private float radius;
     [SerializeField] private LayerMask neededLayerMask;
     [SerializeField] private Slider experienceBar;
     [SerializeField] private UnityEvent onLevelUp, onCoinCollect;
-    private int level = 1, experience = 0, neededExperience = 4, coins;
-    private const float actionTime = 0.15f;
-    private Collider[] colliders;
-    private const int interval = 3;
+    private int _level = 1, _experience = 0, _neededExperience = 4, _coins;
+    private const float ActionTime = 0.15f;
+    private Collider[] _colliders;
+    private const int Interval = 3;
+    public int Level => _level;
     private void Start()
     {
         UpdateExperienceBar();
@@ -22,11 +23,11 @@ public class CollectSystem : BaseSystem
 
     private void Update()
     {
-        if (Time.frameCount % interval != 0) return;
+        if (Time.frameCount % Interval != 0) return;
 
-        colliders = Physics.OverlapSphere(transform.position, radius, neededLayerMask, QueryTriggerInteraction.Collide);
-        if (colliders.Length > 0)
-            foreach (Collider collider in colliders)
+        _colliders = Physics.OverlapSphere(transform.position, radius, neededLayerMask, QueryTriggerInteraction.Collide);
+        if (_colliders.Length > 0)
+            foreach (Collider collider in _colliders)
             {
                 if (collider.TryGetComponent(out CollectableItem collectableItem) && collectableItem.IsTriggered == false)
                 {
@@ -42,13 +43,13 @@ public class CollectSystem : BaseSystem
 
     private void AddCoins(int count)
     {
-        coins += count;
+        _coins += count;
     }
 
     private void AddExperiencePoints(int count)
     {
-        experience += count;
-        if (experience >= neededExperience)
+        _experience += count;
+        if (_experience >= _neededExperience)
         {
             LevelUp();
         }
@@ -56,9 +57,9 @@ public class CollectSystem : BaseSystem
     }
     private void LevelUp()
     {
-        level++;
-        neededExperience *= 2;
-        experience = 0;
+        _level++;
+        _neededExperience *= 2;
+        _experience = 0;
         GameTimeManager.SetTimeScaleSmoothly(0.5f, 0, 0.5f);
         onLevelUp.Invoke();
     }
@@ -66,8 +67,8 @@ public class CollectSystem : BaseSystem
     {
         if (experienceBar == null) return;
 
-        float neededValue = (float)experience / neededExperience;
-        experienceBar.SetSmoothlyValue(neededValue, actionTime);
+        float neededValue = (float)_experience / _neededExperience;
+        experienceBar.SetSmoothlyValue(neededValue, ActionTime);
     }
 
     private void OnDrawGizmosSelected()
@@ -76,7 +77,9 @@ public class CollectSystem : BaseSystem
         Gizmos.DrawWireSphere(transform.position, radius);
     }
 
-    public override void Upgrade(float value)
+    public PlayerSystem PlayerSystem { get; set; } = PlayerSystem.Collect;
+
+    public void Upgrade(float value)
     {
         radius += value;
     }

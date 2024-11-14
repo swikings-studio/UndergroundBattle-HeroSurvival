@@ -1,53 +1,58 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-
 public class UpgradesManager
 {
-    private Dictionary<Upgrade, int> _upgradesLevel;
+    private static Dictionary<Upgrade, int> _upgradesLevel;
     
-    private GameObject player;
-
+    private readonly GameObject _player;
+    private readonly AttackSystem _attackSystem;
     public UpgradesManager(GameObject player)
     {
-        this.player = player;
+        _player = player;
+        _attackSystem = player.GetComponent<AttackSystem>();
         _upgradesLevel = new Dictionary<Upgrade, int>();
     }
 
     public void ApplyUpgrade<T>(T upgrade) where T : Upgrade
     {
-        if (upgrade is UpgradeSystem system) UpgradeSystem(system);
-        else if (upgrade is Weapon weapon)
+        switch (upgrade)
         {
-            
-        }
-        else if (upgrade is Ability ability)
-        {
-            
+            case UpgradeSystem system:
+                UpgradeSystem(system);
+                break;
+            case Weapon:
+            case Ability:
+                UpgradeLevelUp(upgrade);
+                _attackSystem.AddAttackUpgrade(upgrade as AttackUpgrade);
+                break;
         }
     }
 
     private void UpgradeSystem(UpgradeSystem upgrade)
     {
-        if (TryGetPlayerSystem(upgrade.System, out BaseSystem component))
+        var components = _player.GetComponents<IUpgradable>();
+        foreach (var component in components)
         {
-            int upgradeLevel = GetUpgrateLevel(upgrade);
-            component.Upgrade(upgrade.LevelValues[upgradeLevel - 1]);
-            CheckUpgrade(upgrade);
+            if (component.PlayerSystem != upgrade.System) continue;
+            
             UpgradeLevelUp(upgrade);
+            component.Upgrade(upgrade.Value);
+            return;
         }
-        else
-        {
-            Debug.LogError("Failed for find player system with upgrade " + upgrade.Title);
-        }
+        
+        Debug.LogError("Component not founded for upgrade system from " + upgrade.Title);
     }
     
     private void UpgradeLevelUp(Upgrade upgrade)
     {
-        if (_upgradesLevel.ContainsKey(upgrade))
+        if (_upgradesLevel.TryAdd(upgrade, 0))
         {
-            int newLevel = _upgradesLevel[upgrade] + 1;
+            Debug.Log("New upgrade added " + upgrade.Title);
+        }
+        else
+        {
+            var newLevel = _upgradesLevel[upgrade] + 1;
             if (newLevel > upgrade.LevelValues.Length)
             {
                 Debug.LogError("Trying to add over max level to " + upgrade.Title);
@@ -58,60 +63,16 @@ public class UpgradesManager
             Debug.Log($"Upgrade {upgrade.Title} level upped. Now level is {_upgradesLevel[upgrade]}");
         }
     }
-
-    private void CheckUpgrade(Upgrade upgrade)
+    
+    public static int GetUpgradeLevel(Upgrade upgrade)
     {
-        if (_upgradesLevel.ContainsKey(upgrade)) return;
-
-        _upgradesLevel.Add(upgrade, 1);
-    }
-
-    public int GetUpgrateLevel(Upgrade upgrade)
-    {
-        if (_upgradesLevel.Count == 0 || _upgradesLevel.ContainsKey(upgrade) == false) return 1;
-
-        foreach (var upgradeLevel in _upgradesLevel)
-        {
-            if (upgrade == upgradeLevel.Key) return upgradeLevel.Value;
+        try
+        { 
+            return _upgradesLevel.GetValueOrDefault(upgrade, 0);
         }
-
-        return 1;
-    }
-
-    private bool TryGetPlayerSystem<T>(PlayerSystem system, out T systemComponent) where T : BaseSystem
-    {
-        systemComponent = default;
-
-        switch (system)
+        catch
         {
-            case PlayerSystem.Move:
-                if (player.TryGetComponent(out MoveSystem moveSystem))
-                    systemComponent = moveSystem as T;
-                break;
-            case PlayerSystem.Dash:
-                if (player.TryGetComponent(out DashSystem dashSystem))
-                    systemComponent = dashSystem as T;
-                break;
-            case PlayerSystem.Attack:
-                if (player.TryGetComponent(out AttackSystem attackSystem))
-                    systemComponent = attackSystem as T;
-                break;
-            case PlayerSystem.Collect:
-                if (player.TryGetComponent(out CollectSystem collectSystem))
-                    systemComponent = collectSystem as T;
-                break;
-            case PlayerSystem.Throw:
-                if (player.TryGetComponent(out ThrowSystem throwSystem))
-                    systemComponent = throwSystem as T;
-                break;
-            case PlayerSystem.Health:
-                if (player.TryGetComponent(out HealthSystem healthSystem))
-                    systemComponent = healthSystem as T;
-                break;
-            default: return false;
+            return 0;
         }
-
-        return systemComponent != null;
     }
-
 }

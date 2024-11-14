@@ -29,6 +29,6 @@ public abstract class BaseAbility : MonoBehaviour
         level++;
     }
     public float Value => parametrs.LevelValues[level];
-    public float ApplyTime => parametrs.ApplySecondsByLevel[level];
-    public float CooldownTime => parametrs.CooldownSecondsByLevel[level];
+    public float ApplyTime => parametrs.applySecondsByLevel[level];
+    public float CooldownTime => parametrs.cooldownSecondsByLevel[level];
 }

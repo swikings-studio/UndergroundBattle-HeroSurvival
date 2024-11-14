@@ -2,6 +2,9 @@ using UnityEngine;
 
 public abstract class BaseSystem : MonoBehaviour
 {
+    protected const string AnimatorHitTriggerName = "Hit";
+    protected const string AnimatorHitVariationFloatName = "HitVariation";
+    
     protected Rigidbody _rigidbody;
     protected Animator _animator;
 
@@ -9,16 +12,12 @@ public abstract class BaseSystem : MonoBehaviour
     {
         if (_rigidbody == null && TryGetComponent(out Rigidbody rigidbody))
         {
-            Debug.Log("Get Rigidbody");
             _rigidbody = rigidbody;
         }
 
         if (_animator == null && TryGetComponent(out Animator animator))
         {
-            Debug.Log("Get Animator");
             _animator = animator;
         }
     }
-
-    public abstract void Upgrade(float value);
 }

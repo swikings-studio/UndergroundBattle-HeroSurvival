@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -11,9 +12,12 @@ public class UILevelUp : MonoBehaviour
     [SerializeField] private UpgradesList upgrades;
     private int upgradesCount = 3;
     private UpgradesManager _upgradesManager;
-
+    private CollectSystem _playerCollectSystem;
     private void Awake()
     {
+        if (player.TryGetComponent(out CollectSystem collectSystem)) _playerCollectSystem = collectSystem;
+        else throw new Exception("No CollectSystem on Player");
+        
         _upgradesManager = new UpgradesManager(player);
         ClearUpgrades();
     }
@@ -21,6 +25,7 @@ public class UILevelUp : MonoBehaviour
     public void Open()
     {
         gameObject.SetActive(true);
+        newLevelNumberText.text = _playerCollectSystem.Level.ToString();
         SetUpgradeCards();
     }
 
@@ -33,7 +38,7 @@ public class UILevelUp : MonoBehaviour
         {
             var card = cardUpgradesContainer.GetChild(i).GetComponent<UIUpgradeCard>();
             var randomUpgrade = upgrades.List[randomNumbers[i]];
-            int upgradeLevel = _upgradesManager.GetUpgrateLevel(randomUpgrade);
+            int upgradeLevel = UpgradesManager.GetUpgradeLevel(randomUpgrade);
         
             card.SetParametrs(randomUpgrade, cardSpritesList.GetSpritesByLevel(upgradeLevel), cardSpritesList.GetUpgradeIconSpriteByType(randomUpgrade), () =>
             {
